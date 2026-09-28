@@ -1,6 +1,6 @@
 # Narendra Avula — Personal Portfolio
 
-Personal portfolio website for **Narendra Avula**, a Senior Software Developer with 9+ years of experience building software systems, web applications, APIs, cloud-based solutions, and engineering platforms.
+Personal portfolio website for **Narendra Avula**, a Senior Software Developer with 11+ years of experience building software systems, web applications, APIs, cloud-based solutions, and engineering platforms.
 
 The website showcases my professional experience, technical skills, projects, education, and interests in **Cloud, AI, and Generative AI**.
 
@@ -10,7 +10,7 @@ The production website will be added here after deployment.
 
 ## 👨‍💻 About Me
 
-I'm a software engineer with 9+ years of experience across software development, web applications, telecom systems, cloud platforms, resiliency engineering, and AI-assisted developer tooling.
+I'm a software engineer with 11+ years of experience across software development, web applications, telecom systems, cloud platforms, resiliency engineering, and AI-assisted developer tooling.
 
 My primary areas of interest include:
 

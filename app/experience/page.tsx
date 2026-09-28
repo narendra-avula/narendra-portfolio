@@ -48,7 +48,7 @@ export default function Experience() {
           </p>
 
           <h1 className="mt-4 text-5xl font-bold tracking-tight text-zinc-950 md:text-6xl">
-            9+ years of software engineering.
+            11+ years of software engineering.
           </h1>
 
           <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-600">

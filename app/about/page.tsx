@@ -20,7 +20,7 @@ export default function About() {
           </h1>
 
           <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-600">
-            I&apos;m Narendra Avula, a software engineer with 9+ years
+            I&apos;m Narendra Avula, a software engineer with 11+ years
             of experience building backend services, web applications,
             APIs, cloud solutions, and engineering platforms.
           </p>

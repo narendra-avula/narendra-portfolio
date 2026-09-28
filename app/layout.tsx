@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Narendra Avula | Software Engineer · Cloud · AI",
   description:
-    "Personal portfolio of Narendra Avula — Software Engineer with 9+ years of experience in Python, Django, cloud, resiliency engineering, and AI/GenAI.",
+    "Personal portfolio of Narendra Avula — Software Engineer with 11+ years of experience in Python, Django, cloud, resiliency engineering, and AI/GenAI.",
 };
 
 export default function RootLayout({
