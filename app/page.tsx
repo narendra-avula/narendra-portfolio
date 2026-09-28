@@ -197,7 +197,7 @@ export default function Home() {
             <div className="space-y-5 text-lg leading-8 text-zinc-600">
 
               <p>
-                I&apos;m a software engineer with 9+ years of
+                I&apos;m a software engineer with 11+ years of
                 experience building backend services, web
                 applications, APIs, cloud-based solutions, and
                 engineering platforms.
@@ -357,7 +357,7 @@ export default function Home() {
               </p>
 
               <h2 className="mt-3 text-3xl font-bold text-zinc-950 md:text-4xl">
-                9+ years of building software.
+                11+ years of building software.
               </h2>
 
             </div>
