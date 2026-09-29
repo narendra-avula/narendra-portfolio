@@ -372,7 +372,7 @@ export default function Home() {
                 </p>
 
                 <h3 className="mt-2 text-xl font-semibold text-zinc-950">
-                  Software Engineer II
+                  Software Engineer III
                 </h3>
 
                 <p className="mt-1 font-medium text-zinc-700">

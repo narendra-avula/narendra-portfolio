@@ -5,7 +5,7 @@ const experiences = [
   {
     period: "Apr 2022 — Present",
     company: "JPMorgan Chase",
-    role: "Software Engineer II",
+    role: "Software Engineer III",
     domain: "Resiliency Engineering / Chaos Engineering",
     description:
       "Working on engineering solutions for testing and improving application resilience across private, public, and hybrid cloud environments.",
