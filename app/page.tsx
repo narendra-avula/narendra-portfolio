@@ -1,263 +1,16 @@
-
-/* ============================ DATA ============================ */
-
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
-import type { IconType } from "react-icons";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import {
-  SiPython,
-  SiJavascript,
-  SiTypescript,
-  SiHtml5,
-  SiGnubash,
-  SiDjango,
-  SiFlask,
-  SiRabbitmq,
-  SiAngular,
-  SiReact,
-  SiIonic,
-  SiBootstrap,
-  SiLinux,
-  SiGit,
-  SiJenkins,
-  SiMysql,
-  SiMongodb,
-  SiSqlite,
-  SiLangchain,
-  SiPrometheus,
-  SiGrafana,
-} from "react-icons/si";
-import {
-  LuWebhook,
-  LuBoxes,
-  LuServer,
-  LuDatabase,
-  LuNetwork,
-  LuBrain,
-  LuSparkles,
-  LuWorkflow,
-  LuBot,
-  LuZap,
-  LuShield,
-  LuEye,
-  LuTestTube,
-  LuCode,
-  LuRefreshCw,
-  LuFileCode,
-  LuCloud,
   LuMail,
   LuFileText,
 } from "react-icons/lu";
-
-const skillsOverview = [
-  {
-    title: "Software Engineering",
-    description:
-      "Building backend services, APIs, web applications, and developer platforms.",
-    technologies:
-      "Python · Django · REST APIs · TypeScript · Angular · React",
-  },
-  {
-    title: "Cloud & Reliability",
-    description:
-      "Designing reliable systems and working with cloud, automation, resiliency, and observability.",
-    technologies:
-      "AWS · Microservices · Automation · Chaos Engineering · Observability",
-  },
-  {
-    title: "AI & GenAI",
-    description:
-      "Exploring practical applications of machine learning, LLMs, and Generative AI.",
-    technologies:
-      "ML · Deep Learning · LLMs · GenAI · RAG · LangChain",
-  },
-];
-
-const experiences = [
-  {
-    period: "Apr 2022 — Present",
-    company: "JPMorgan Chase",
-    role: "Software Engineer III",
-    domain: "Resiliency Engineering / Chaos Engineering",
-    description:
-      "Working on engineering solutions for testing and improving application resilience across private, public, and hybrid cloud environments.",
-    technologies:
-      "Python · Django · REST APIs · Microservices · Linux · Shell Scripting · Cloud · Observability",
-  },
-  {
-    period: "Jul 2020 — Mar 2022",
-    company: "Qvantel Software Solutions",
-    role: "Senior Software Developer",
-    domain: "Telecom BSS",
-    description:
-      "Worked on highly scalable telecom Business Support Systems and integrations with third-party systems.",
-    technologies:
-      "Python · Django · Django REST Framework · Microservices · RabbitMQ · Linux · Shell Scripting",
-  },
-  {
-    period: "May 2015 — Jun 2020",
-    company: "CustomFurnish / Hinshitsu Manufacturing",
-    role: "Software Developer",
-    domain: "E-commerce & Internal Applications",
-    description:
-      "Developed e-commerce platforms, internal business applications, dashboards, APIs, authentication systems, and customer-facing web applications.",
-    technologies:
-      "Python · Django · Angular · TypeScript · MySQL · MongoDB · AWS · Linux",
-  },
-];
-
-const projects = [
-  {
-    title: "Chaos Engineering & Resiliency",
-    category: "Professional",
-    description:
-      "Engineering solutions for testing application resilience across private, public, and hybrid cloud environments.",
-    technologies:
-      "Python · Django · REST APIs · Microservices · Cloud · Linux · Shell Scripting · Observability",
-  },
-  {
-    title: "AI-Assisted Code Review",
-    category: "AI / GenAI",
-    description:
-      "An exploration of AI-powered developer tooling combining LLMs, code analysis, security scanning, RAG, and automated review workflows.",
-    technologies:
-      "Python · LLMs · RAG · LangChain · Code Analysis · AI",
-  },
-  {
-    title: "Telecom BSS Platform",
-    category: "Professional",
-    description:
-      "Development and integration of scalable telecom Business Support Systems with third-party platforms.",
-    technologies: "Python · Django · REST APIs · Microservices · RabbitMQ",
-  },
-  {
-    title: "Operations Management Platform",
-    category: "E-commerce / Internal",
-    description:
-      "Internal web and mobile platform supporting project management, roll calls, reminders, referrals, authentication, and role-based access.",
-    technologies:
-      "Python · Django · Angular · TypeScript · MySQL · MongoDB · AWS · Ionic",
-  },
-  {
-    title: "Custom Sofa E-commerce",
-    category: "E-commerce",
-    description:
-      "E-commerce platform allowing customers to configure customized sofas based on their requirements.",
-    technologies:
-      "Python · Django · Angular · TypeScript · MongoDB · AWS · Payment Gateways",
-  },
-  {
-    title: "Product Marketplace",
-    category: "E-commerce",
-    description:
-      "Online platform supporting customizable products, shopping cart, authentication, payments, discounts, orders, invoices, and dashboards.",
-    technologies: "Python · Django · jQuery · MongoDB · Linux · AWS",
-  },
-];
-
-type Skill = {
-  name: string;
-  icon: IconType;
-  color?: string;
-};
-
-type SkillGroup = {
-  title: string;
-  skills: Skill[];
-};
-
-const skillGroups: SkillGroup[] = [
-  {
-    title: "Programming",
-    skills: [
-      { name: "Python", icon: SiPython, color: "#3776AB" },
-      { name: "JavaScript", icon: SiJavascript, color: "#C7A600" },
-      { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
-      { name: "HTML5", icon: SiHtml5, color: "#E34F26" },
-      { name: "CSS3", icon: LuFileCode, color: "#1572B6" },
-      { name: "Shell Scripting", icon: SiGnubash, color: "#4EAA25" },
-    ],
-  },
-  {
-    title: "Backend & APIs",
-    skills: [
-      { name: "Django", icon: SiDjango, color: "#092E20" },
-      { name: "Django REST Framework", icon: SiDjango, color: "#A30000" },
-      { name: "Flask", icon: SiFlask, color: "#000000" },
-      { name: "REST APIs", icon: LuWebhook, color: "#2563EB" },
-      { name: "Microservices", icon: LuBoxes, color: "#7C3AED" },
-      { name: "RabbitMQ", icon: SiRabbitmq, color: "#FF6600" },
-    ],
-  },
-  {
-    title: "Frontend",
-    skills: [
-      { name: "Angular", icon: SiAngular, color: "#DD0031" },
-      { name: "React", icon: SiReact, color: "#61DAFB" },
-      { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
-      { name: "JavaScript", icon: SiJavascript, color: "#C7A600" },
-      { name: "Ionic", icon: SiIonic, color: "#3880FF" },
-      { name: "Bootstrap", icon: SiBootstrap, color: "#7952B3" },
-    ],
-  },
-  {
-    title: "Cloud & Infrastructure",
-    skills: [
-      { name: "AWS", icon: LuCloud, color: "#FF9900" },
-      { name: "EC2", icon: LuServer, color: "#FF9900" },
-      { name: "S3", icon: LuCloud, color: "#569A31" },
-      { name: "Linux", icon: SiLinux, color: "#FCC624" },
-      { name: "Git", icon: SiGit, color: "#F05032" },
-      { name: "Jenkins", icon: SiJenkins, color: "#D33833" },
-      { name: "Cloud Platforms", icon: LuCloud, color: "#0EA5E9" },
-    ],
-  },
-  {
-    title: "Data",
-    skills: [
-      { name: "MySQL", icon: SiMysql, color: "#4479A1" },
-      { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
-      { name: "SQLite", icon: SiSqlite, color: "#003B57" },
-      { name: "Database Design", icon: LuDatabase, color: "#0891B2" },
-      { name: "Data Modeling", icon: LuNetwork, color: "#10B981" },
-    ],
-  },
-  {
-    title: "AI & Machine Learning",
-    skills: [
-      { name: "Machine Learning", icon: LuBrain, color: "#7C3AED" },
-      { name: "Deep Learning", icon: LuBrain, color: "#9333EA" },
-      { name: "LLMs", icon: LuSparkles, color: "#F59E0B" },
-      { name: "Generative AI", icon: LuSparkles, color: "#EC4899" },
-      { name: "RAG", icon: LuWorkflow, color: "#10B981" },
-      { name: "LangChain", icon: SiLangchain, color: "#1C3C3C" },
-      { name: "AI-assisted Development", icon: LuBot, color: "#6366F1" },
-    ],
-  },
-  {
-    title: "Reliability & Engineering",
-    skills: [
-      { name: "Chaos Engineering", icon: LuZap, color: "#EF4444" },
-      { name: "Resiliency Engineering", icon: LuShield, color: "#0EA5E9" },
-      { name: "Observability", icon: LuEye, color: "#8B5CF6" },
-      { name: "Prometheus", icon: SiPrometheus, color: "#E6522C" },
-      { name: "Grafana", icon: SiGrafana, color: "#F46800" },
-      { name: "Automation", icon: LuWorkflow, color: "#10B981" },
-    ],
-  },
-  {
-    title: "Development Practices",
-    skills: [
-      { name: "REST API Design", icon: LuWebhook, color: "#2563EB" },
-      { name: "Unit Testing", icon: LuTestTube, color: "#DC2626" },
-      { name: "Object-Oriented Programming", icon: LuBoxes, color: "#7C3AED" },
-      { name: "Git", icon: SiGit, color: "#F05032" },
-      { name: "Agile Development", icon: LuRefreshCw, color: "#059669" },
-      { name: "Code Review", icon: LuCode, color: "#374151" },
-    ],
-  },
-];
+import {
+  skillsOverview,
+  experiences,
+  projects,
+  skillGroups,
+} from "@/app/data";
 
 /* ============================ PAGE ============================ */
 
@@ -267,39 +20,95 @@ export default function Home() {
       <Navbar />
 
       {/* ==================== HERO ==================== */}
-      <section id="home" className="border-b border-zinc-200">
+      <section id="home" className="relative overflow-hidden border-b border-zinc-200">
+        {/* Decorative gradient blobs */}
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div
+            className="absolute right-0 top-0 h-[560px] w-[560px] -translate-y-1/4 translate-x-1/4 rounded-full blur-3xl"
+            style={{
+              background:
+                "radial-gradient(circle, #dbeafe 0%, transparent 65%)",
+            }}
+          />
+          <div
+            className="absolute bottom-0 left-0 h-[420px] w-[420px] -translate-x-1/4 translate-y-1/4 rounded-full blur-3xl"
+            style={{
+              background:
+                "radial-gradient(circle, #ede9fe 0%, transparent 65%)",
+            }}
+          />
+        </div>
+
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
           <div className="max-w-4xl">
-            <p className="mb-6 text-sm font-semibold uppercase tracking-[0.25em] text-blue-600">
+            {/* Status badge */}
+            <div className="animate-fade-up mb-8 inline-flex items-center gap-2.5 rounded-full border border-zinc-200 bg-white px-4 py-1.5 shadow-sm">
+              <span
+                className="h-2 w-2 rounded-full bg-green-500"
+                style={{ boxShadow: "0 0 0 3px #22c55e2a" }}
+              />
+              <span className="text-xs font-medium text-zinc-600">
+                Available to connect
+              </span>
+            </div>
+
+            <p className="animate-fade-up-1 mb-6 text-sm font-semibold uppercase tracking-[0.25em] text-blue-600">
               Software Engineer · Cloud · AI
             </p>
 
-            <h1 className="text-5xl font-bold tracking-tight text-zinc-950 sm:text-6xl md:text-7xl">
-              Hi, I&apos;m <span className="text-zinc-500">Narendra Avula.</span>
+            <h1 className="animate-fade-up-1 text-5xl font-bold tracking-tight text-zinc-950 sm:text-6xl md:text-7xl">
+              Hi, I&apos;m{" "}
+              <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+                Narendra Avula.
+              </span>
             </h1>
 
-            <h2 className="mt-6 text-2xl font-semibold leading-tight text-zinc-800 md:text-3xl">
-              Senior Software Developer | AI &amp; Cloud Enthusiast
+            <h2 className="animate-fade-up-2 mt-6 text-2xl font-semibold leading-tight text-zinc-700 md:text-3xl">
+              Senior Software Engineer · AI &amp; Cloud
             </h2>
 
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-600">
-              Building reliable software systems and exploring the intersection of
-              software engineering, cloud, and Generative AI.
+            <p className="animate-fade-up-2 mt-6 max-w-2xl text-lg leading-8 text-zinc-600">
+              Building reliable software systems and exploring the intersection
+              of software engineering, cloud, and Generative AI.
             </p>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <div className="animate-fade-up-3 mt-10 flex flex-col gap-4 sm:flex-row">
               <a
                 href="#projects"
-                className="rounded-full bg-zinc-950 px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-zinc-800"
+                className="rounded-full bg-zinc-950 px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
               >
                 View My Work
               </a>
 
               <a
                 href="/resume.pdf"
-                className="rounded-full border border-zinc-300 bg-white px-6 py-3 text-center text-sm font-semibold text-zinc-900 transition hover:border-zinc-400 hover:bg-zinc-100"
+                download="Narendra_Avula_Resume.pdf"
+                className="rounded-full border border-zinc-300 bg-white px-6 py-3 text-center text-sm font-semibold text-zinc-900 transition hover:border-zinc-400 hover:bg-zinc-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
               >
                 Download Resume
+              </a>
+            </div>
+
+            {/* Social links */}
+            <div className="animate-fade-up-3 mt-8 flex items-center gap-5">
+              <a
+                href="https://www.linkedin.com/in/narendraavula/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-zinc-500 transition hover:text-zinc-900 focus-visible:text-zinc-900 focus-visible:underline"
+              >
+                <FaLinkedin className="h-4 w-4" aria-hidden="true" />
+                LinkedIn
+              </a>
+              <span className="text-zinc-300" aria-hidden="true">·</span>
+              <a
+                href="https://github.com/narendra-avula/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-zinc-500 transition hover:text-zinc-900 focus-visible:text-zinc-900 focus-visible:underline"
+              >
+                <FaGithub className="h-4 w-4" aria-hidden="true" />
+                GitHub
               </a>
             </div>
           </div>
@@ -311,6 +120,11 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 py-20">
           <div className="grid gap-12 md:grid-cols-[1fr_1.5fr]">
             <div>
+              {/* Monogram */}
+              <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-violet-600 text-xl font-bold text-white shadow-lg">
+                NA
+              </div>
+
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
                 About Me
               </p>
@@ -322,9 +136,9 @@ export default function Home() {
 
             <div className="space-y-5 text-lg leading-8 text-zinc-600">
               <p>
-                I&apos;m a software engineer with 11+ years of experience building
-                backend services, web applications, APIs, cloud-based solutions,
-                and engineering platforms.
+                I&apos;m a software engineer with 11+ years of experience
+                building backend services, web applications, APIs, cloud-based
+                solutions, and engineering platforms.
               </p>
               <p>
                 My career has evolved from web and e-commerce development to
@@ -352,24 +166,38 @@ export default function Home() {
             </h3>
 
             <div className="mt-10 grid gap-6 md:grid-cols-3">
-              {skillsOverview.map((skill) => (
-                <div
-                  key={skill.title}
-                  className="rounded-2xl border border-zinc-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md"
-                >
-                  <h4 className="text-xl font-semibold text-zinc-950">
-                    {skill.title}
-                  </h4>
+              {skillsOverview.map((skill) => {
+                const Icon = skill.icon;
+                return (
+                  <div
+                    key={skill.title}
+                    className="rounded-2xl border border-zinc-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md"
+                  >
+                    <div
+                      className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl"
+                      style={{ backgroundColor: skill.iconBg }}
+                    >
+                      <Icon
+                        className="h-5 w-5"
+                        style={{ color: skill.iconColor }}
+                        aria-hidden="true"
+                      />
+                    </div>
 
-                  <p className="mt-4 leading-7 text-zinc-600">
-                    {skill.description}
-                  </p>
+                    <h4 className="text-xl font-semibold text-zinc-950">
+                      {skill.title}
+                    </h4>
 
-                  <p className="mt-6 border-t border-zinc-100 pt-5 text-sm leading-6 text-zinc-500">
-                    {skill.technologies}
-                  </p>
-                </div>
-              ))}
+                    <p className="mt-4 leading-7 text-zinc-600">
+                      {skill.description}
+                    </p>
+
+                    <p className="mt-6 border-t border-zinc-100 pt-5 text-sm leading-6 text-zinc-500">
+                      {skill.technologies}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -390,36 +218,52 @@ export default function Home() {
             A journey across e-commerce, telecom, cloud platforms, resiliency
             engineering, and AI-assisted developer tooling.
           </p>
-          <div className="mt-16 max-w-5xl space-y-12">
-            {experiences.map((experience) => (
-              <article
-                key={experience.company}
-                className="relative border-l-2 border-zinc-200 pl-8"
-              >
-                <div className="absolute -left-[9px] top-1 h-4 w-4 rounded-full border-4 border-stone-50 bg-blue-600" />
 
-                <p className="text-sm font-semibold text-blue-600">
-                  {experience.period}
-                </p>
+          <div className="mt-16 max-w-5xl space-y-12">
+            {experiences.map((exp) => (
+              <article
+                key={exp.company}
+                className={`relative border-l-2 pl-8 ${
+                  exp.current ? "border-blue-500" : "border-zinc-200"
+                }`}
+              >
+                <div
+                  className={`absolute -left-[9px] top-1 h-4 w-4 rounded-full border-4 ${
+                    exp.current
+                      ? "border-blue-600 bg-blue-600 shadow-[0_0_0_4px_#dbeafe]"
+                      : "border-stone-50 bg-blue-500"
+                  }`}
+                />
+
+                <div className="flex flex-wrap items-center gap-3">
+                  <p className="text-sm font-semibold text-blue-600">
+                    {exp.period}
+                  </p>
+                  {exp.current && (
+                    <span className="rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-blue-600">
+                      Current
+                    </span>
+                  )}
+                </div>
 
                 <h3 className="mt-2 text-2xl font-bold text-zinc-950">
-                  {experience.role}
+                  {exp.role}
                 </h3>
 
                 <h4 className="mt-1 text-lg font-medium text-zinc-700">
-                  {experience.company}
+                  {exp.company}
                 </h4>
 
                 <p className="mt-5 font-semibold text-zinc-900">
-                  {experience.domain}
+                  {exp.domain}
                 </p>
 
                 <p className="mt-3 max-w-3xl text-lg leading-8 text-zinc-600">
-                  {experience.description}
+                  {exp.description}
                 </p>
 
                 <p className="mt-5 max-w-3xl text-sm leading-7 text-zinc-500">
-                  {experience.technologies}
+                  {exp.technologies}
                 </p>
               </article>
             ))}
@@ -450,8 +294,8 @@ export default function Home() {
                 className="rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-semibold text-blue-600">
-                    0{index + 1}
+                  <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-sm font-bold text-transparent">
+                    {String(index + 1).padStart(2, "0")}
                   </span>
 
                   <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600">
@@ -493,10 +337,13 @@ export default function Home() {
             My academic background and ongoing learning across software
             engineering, cloud, machine learning, and AI.
           </p>
-          <div className="mt-16 max-w-5xl">
+
+          <div className="mt-16 max-w-5xl space-y-16">
             {/* B.Tech */}
             <article className="border-l-2 border-blue-500 pl-8">
-              <p className="text-sm font-semibold text-blue-600">Undergraduate</p>
+              <p className="text-sm font-semibold text-blue-600">
+                Undergraduate
+              </p>
 
               <h3 className="mt-3 text-2xl font-bold text-zinc-950">
                 Bachelor of Technology — Computer Science & Engineering
@@ -506,7 +353,9 @@ export default function Home() {
                 Anil Neerukonda Institute of Technology & Sciences
               </p>
 
-              <p className="mt-2 text-zinc-500">Affiliated to Andhra University</p>
+              <p className="mt-2 text-zinc-500">
+                Affiliated to Andhra University
+              </p>
 
               <p className="mt-5 text-lg leading-8 text-zinc-600">
                 Graduated with a CGPA of 7.5, building a foundation in computer
@@ -516,7 +365,7 @@ export default function Home() {
             </article>
 
             {/* M.Tech */}
-            <article className="mt-16 border-l-2 border-zinc-200 pl-8">
+            <article className="border-l-2 border-zinc-200 pl-8">
               <p className="text-sm font-semibold text-blue-600">
                 Postgraduate / Professional Education
               </p>
@@ -537,8 +386,10 @@ export default function Home() {
             </article>
 
             {/* AWS */}
-            <article className="mt-16 border-l-2 border-zinc-200 pl-8">
-              <p className="text-sm font-semibold text-blue-600">Certification</p>
+            <article className="border-l-2 border-zinc-200 pl-8">
+              <p className="text-sm font-semibold text-blue-600">
+                Certification
+              </p>
 
               <h3 className="mt-3 text-2xl font-bold text-zinc-950">
                 AWS Certified Developer — Associate
@@ -573,9 +424,16 @@ export default function Home() {
             {skillGroups.map((group) => (
               <article
                 key={group.title}
-                className="rounded-2xl border border-zinc-200 bg-white p-7 shadow-sm"
+                className="rounded-2xl border border-zinc-200 bg-white p-7 shadow-sm transition duration-300 hover:border-zinc-300 hover:shadow-md"
               >
-                <h3 className="text-xl font-bold text-zinc-950">{group.title}</h3>
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-bold text-zinc-950">
+                    {group.title}
+                  </h3>
+                  <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-500">
+                    {group.skills.length}
+                  </span>
+                </div>
 
                 <div className="mt-6 flex flex-wrap gap-2.5">
                   {group.skills.map(({ name, icon: Icon, color }) => (
@@ -595,7 +453,6 @@ export default function Home() {
                           aria-hidden="true"
                         />
                       </span>
-
                       <span className="font-medium">{name}</span>
                     </span>
                   ))}
@@ -626,14 +483,18 @@ export default function Home() {
             {/* Email */}
             <a
               href="mailto:narendraavula2@gmail.com"
-              className="group rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md"
+              className="group rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
             >
               <div className="flex items-center gap-3">
                 <span
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
                   style={{ backgroundColor: "#EA43351A" }}
                 >
-                  <LuMail className="h-4 w-4" style={{ color: "#EA4335" }} aria-hidden="true" />
+                  <LuMail
+                    className="h-4 w-4"
+                    style={{ color: "#EA4335" }}
+                    aria-hidden="true"
+                  />
                 </span>
 
                 <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">
@@ -658,14 +519,18 @@ export default function Home() {
               href="https://www.linkedin.com/in/narendraavula/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md"
+              className="group rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
             >
               <div className="flex items-center gap-3">
                 <span
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
                   style={{ backgroundColor: "#0A66C21A" }}
                 >
-                  <FaLinkedin className="h-4 w-4" style={{ color: "#0A66C2" }} aria-hidden="true" />
+                  <FaLinkedin
+                    className="h-4 w-4"
+                    style={{ color: "#0A66C2" }}
+                    aria-hidden="true"
+                  />
                 </span>
 
                 <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">
@@ -690,14 +555,18 @@ export default function Home() {
               href="https://github.com/narendra-avula/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md"
+              className="group rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
             >
               <div className="flex items-center gap-3">
                 <span
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
                   style={{ backgroundColor: "#1817171A" }}
                 >
-                  <FaGithub className="h-4 w-4" style={{ color: "#181717" }} aria-hidden="true" />
+                  <FaGithub
+                    className="h-4 w-4"
+                    style={{ color: "#181717" }}
+                    aria-hidden="true"
+                  />
                 </span>
 
                 <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">
@@ -720,14 +589,19 @@ export default function Home() {
             {/* Resume */}
             <a
               href="/resume.pdf"
-              className="group rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md"
+              download="Narendra_Avula_Resume.pdf"
+              className="group rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
             >
               <div className="flex items-center gap-3">
                 <span
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
                   style={{ backgroundColor: "#2563EB1A" }}
                 >
-                  <LuFileText className="h-4 w-4" style={{ color: "#2563EB" }} aria-hidden="true" />
+                  <LuFileText
+                    className="h-4 w-4"
+                    style={{ color: "#2563EB" }}
+                    aria-hidden="true"
+                  />
                 </span>
 
                 <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">

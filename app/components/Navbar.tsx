@@ -22,7 +22,7 @@ export default function Navbar() {
         <a
           href="#top"
           onClick={() => setMenuOpen(false)}
-          className="text-lg font-bold tracking-tight text-zinc-950"
+          className="text-lg font-bold tracking-tight text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
         >
           Narendra Avula
         </a>
@@ -33,7 +33,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="transition hover:text-zinc-950"
+              className="transition hover:text-zinc-950 focus-visible:text-zinc-950 focus-visible:underline focus-visible:outline-none"
             >
               {link.name}
             </a>
@@ -43,7 +43,7 @@ export default function Navbar() {
         {/* Desktop CTA */}
         <a
           href="#contact"
-          className="hidden rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-900 transition hover:border-zinc-900 hover:bg-zinc-900 hover:text-white md:block"
+          className="hidden rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-900 transition hover:border-zinc-900 hover:bg-zinc-900 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 md:block"
         >
           Let&apos;s Talk
         </a>
@@ -54,7 +54,7 @@ export default function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle navigation menu"
           aria-expanded={menuOpen}
-          className="rounded-lg border border-zinc-300 p-2 text-zinc-900 md:hidden"
+          className="rounded-lg border border-zinc-300 p-2 text-zinc-900 transition hover:border-zinc-400 hover:bg-zinc-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 md:hidden"
         >
           {menuOpen ? (
             <svg
@@ -64,6 +64,7 @@ export default function Navbar() {
               viewBox="0 0 24 24"
               stroke="currentColor"
               strokeWidth={2}
+              aria-hidden="true"
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -75,6 +76,7 @@ export default function Navbar() {
               viewBox="0 0 24 24"
               stroke="currentColor"
               strokeWidth={2}
+              aria-hidden="true"
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
@@ -92,7 +94,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="border-b border-zinc-200 py-4 text-sm font-medium text-zinc-700 transition hover:text-zinc-950"
+                  className="border-b border-zinc-200 py-4 text-sm font-medium text-zinc-700 transition hover:text-zinc-950 focus-visible:text-zinc-950 focus-visible:underline focus-visible:outline-none"
                 >
                   {link.name}
                 </a>
@@ -101,7 +103,7 @@ export default function Navbar() {
               <a
                 href="#contact"
                 onClick={() => setMenuOpen(false)}
-                className="mt-4 rounded-full bg-zinc-950 px-5 py-3 text-center text-sm font-medium text-white"
+                className="mt-4 rounded-full bg-zinc-950 px-5 py-3 text-center text-sm font-medium text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
               >
                 Let&apos;s Talk
               </a>
