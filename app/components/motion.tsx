@@ -289,26 +289,6 @@ export function HeroBackground() {
   );
 }
 
-/* Animated scroll cue under the hero */
-export function ScrollCue() {
-  return (
-    <motion.a
-      href="#about"
-      aria-label="Scroll to About section"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 1.4 }}
-      className="mt-16 inline-flex h-10 w-6 items-start justify-center rounded-full border-2 border-zinc-300 p-1.5 dark:border-zinc-700"
-    >
-      <motion.span
-        className="h-2 w-1 rounded-full bg-zinc-400 dark:bg-zinc-500"
-        animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
-        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-      />
-    </motion.a>
-  );
-}
-
 /* Vertical timeline whose line draws itself as you scroll */
 export function Timeline({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
