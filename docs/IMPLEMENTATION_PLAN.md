@@ -154,3 +154,29 @@ Status: steps 1–3 done, step 4 (deploy and verify live) open. Lighthouse on a 
 2. Keyboard-only and reduced-motion passes; axe checks in Playwright.
 3. CI workflow (typecheck, lint, build, tests). `docs/DEPLOYMENT.md`, `docs/ARCHITECTURE.md`, `docs/CONTENT_GUIDE.md`, README.
 4. Deploy and verify the live site (OG preview, sitemap, robots, analytics events).
+
+---
+
+## Remaining work (as of 2026-11-06)
+
+Phases 1–7 steps 1–3 are done on `feat/portfolio-2`. PR #1 (https://github.com/narendra-avula/narendra-portfolio/pull/1) is open with CI green; merging into `main` deploys production on Vercel.
+
+### Before merging PR #1
+- [ ] Replace `public/resume.pdf` with the current resume (D2). The existing one says 9 years / SE II and shows a phone number. Keep the file name.
+
+### After merging (Phase 7 step 4)
+- [ ] Run the release checklist in `docs/DEPLOYMENT.md` on the live site: pages load, resume downloads, sitemap and robots, OG preview (LinkedIn Post Inspector), analytics events, 404 page.
+- [ ] Enable Vercel Analytics in the Vercel project dashboard.
+
+### Needs owner input
+- [ ] Contact form (D4): set `RESEND_API_KEY` and `CONTACT_FROM_EMAIL` (sender on a domain verified in Resend) in Vercel.
+- [ ] Domain (D1): connect narendraavula.com in Vercel, then set `NEXT_PUBLIC_SITE_URL`. Steps in `docs/DEPLOYMENT.md`.
+- [ ] Insights (D7): review the two drafts, then set `status: "published"` and `published` in `content/insights.ts`.
+- [ ] CheckMate (D3): provide a source repo or notes for its case study.
+- [ ] Testimonials: add at least one quote with the person's permission (`content/extras.ts`); the section stays hidden until then.
+
+### Optional
+- [ ] Require the CI check in branch protection for `main`.
+- [ ] Delete the old local worktree `.claude/worktrees/agent-ab7ba141e81613f41` and its branch.
+- [ ] Delete the local `backup/pre-coauthor-removal/*` tags once the rewritten branches are on GitHub.
+- [ ] Homepage mobile Lighthouse performance is 93–94 (LCP about 3 s on the simulated slow phone). Further gains need JavaScript bundle trimming; low priority.
