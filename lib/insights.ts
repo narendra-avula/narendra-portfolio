@@ -35,7 +35,7 @@ export function readingMinutes(source: string): number {
   return Math.max(1, Math.round(words / WORDS_PER_MINUTE));
 }
 
-/** h2/h3 headings, with the same ids components/insights/mdx.tsx renders */
+/** h2/h3 headings, with the same ids mdx-components.tsx renders */
 export function extractHeadings(source: string): Heading[] {
   return [...stripCode(source).matchAll(/^(#{2,3})\s+(.+?)\s*$/gm)].map(([, hashes, raw]) => {
     const text = raw.replace(/[`*_]/g, "");
