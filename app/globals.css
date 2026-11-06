@@ -110,6 +110,18 @@ html.theme-transition *::after {
   transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease !important;
 }
 
+/* Hero entrance (FadeIn): CSS so it runs before hydration */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 /* Blinking caret for the hero code card */
 @keyframes caret {
   50% {
@@ -122,8 +134,17 @@ html.theme-transition *::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-caret {
+  .animate-caret,
+  .fade-up {
     animation: none;
+  }
+
+  /* Entrance animations (components/motion): show content immediately.
+     !important beats Motion's inline opacity/transform, including the
+     server-rendered initial state. */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

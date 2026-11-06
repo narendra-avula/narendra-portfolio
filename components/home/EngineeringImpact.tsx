@@ -36,7 +36,13 @@ function ContributionGraph({ data }: { data: Contributions }) {
   const months = monthLabels(data.weeks);
   const cols = { gridTemplateColumns: `repeat(${data.weeks.length}, minmax(0, 1fr))` };
   return (
-    <div className="overflow-x-auto pb-1">
+    // Focusable so keyboard users can scroll it on narrow screens
+    <div
+      role="region"
+      aria-label="GitHub contributions (scrollable)"
+      tabIndex={0}
+      className={`overflow-x-auto rounded-md pb-1 ${focusRing}`}
+    >
       <div className="min-w-[680px]">
         <div className="grid gap-[3px] text-[10px] text-subtle" style={cols} aria-hidden="true">
           {months.map((m, i) => (

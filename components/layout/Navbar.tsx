@@ -56,12 +56,11 @@ export default function Navbar() {
           href="/#top"
           onClick={() => setOpen(false)}
           className={`flex items-center gap-2.5 rounded-md font-semibold text-fg ${focusRing}`}
-          aria-label={`${profile.name}, home`}
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-fg font-mono text-xs font-bold text-bg">
+          <span aria-hidden="true" className="flex h-8 w-8 items-center justify-center rounded-md bg-fg font-mono text-xs font-bold text-bg">
             {profile.initials}
           </span>
-          <span className="hidden sm:inline">{profile.name}</span>
+          <span className="sr-only sm:not-sr-only">{profile.name}</span>
         </Link>
 
         <ul className="hidden items-center gap-1 text-sm lg:flex">

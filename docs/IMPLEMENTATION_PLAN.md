@@ -149,6 +149,7 @@ Status: done. Articles are `content/insights/<slug>.mdx` with metadata in `conte
 5. Tests: metadata per route, contact validation and error states.
 
 ### Phase 7 — Testing, performance, accessibility, deployment
+Status: steps 1–3 done, step 4 (deploy and verify live) open. Lighthouse on a local production build: desktop 100 in all categories on `/`, `/projects/prepforge` and `/recruiter`. Mobile accessibility, best practices and SEO are 100; mobile performance is 93–94 on `/` (was 87), 96 on `/projects/prepforge` and 97 on `/recruiter`. Hero `FadeIn` is now CSS so the LCP text paints before hydration. `tests/e2e/a11y.spec.ts` runs axe (WCAG 2.2 AA) on every route type in both themes, plus keyboard and reduced-motion checks. Under reduced motion, entrance animations (`data-reveal`) show content immediately.
 1. Lighthouse runs (mobile + desktop) on `/`, `/projects/[slug]`, `/recruiter`; fix regressions.
 2. Keyboard-only and reduced-motion passes; axe checks in Playwright.
 3. CI workflow (typecheck, lint, build, tests). `docs/DEPLOYMENT.md`, `docs/ARCHITECTURE.md`, `docs/CONTENT_GUIDE.md`, README.

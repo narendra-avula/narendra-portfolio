@@ -3,7 +3,7 @@ import { statusLabel, type CapabilityStatus } from "@/content/case-studies";
 const styles: Record<CapabilityStatus, string> = {
   implemented: "border-emerald-500/30 text-emerald-700 dark:text-emerald-300",
   "in-progress": "border-accent/40 text-accent",
-  experimental: "border-amber-500/40 text-amber-700 dark:text-amber-300",
+  experimental: "border-amber-500/40 text-amber-800 dark:text-amber-300",
   planned: "border-line-strong text-subtle",
 };
 

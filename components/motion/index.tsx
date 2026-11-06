@@ -1,8 +1,10 @@
 "use client";
 
 /**
- * Restrained motion primitives. Everything respects prefers-reduced-motion
- * through MotionProvider (reducedMotion="user").
+ * Restrained motion primitives. Everything respects prefers-reduced-motion:
+ * MotionProvider (reducedMotion="user") drops movement, and every entrance
+ * animation carries data-reveal so globals.css shows it at full opacity
+ * straight away (Motion would otherwise still fade it in).
  */
 
 import {
@@ -48,6 +50,7 @@ export function Reveal({
 }) {
   return (
     <motion.div
+      data-reveal
       className={className}
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -99,7 +102,7 @@ export function StaggerItem({
 }) {
   const Comp = motion[as];
   return (
-    <Comp className={className} variants={staggerChild}>
+    <Comp data-reveal className={className} variants={staggerChild}>
       {children}
     </Comp>
   );
@@ -133,6 +136,7 @@ export function TimelineItem({
 }) {
   return (
     <motion.li
+      data-reveal
       className="relative list-none pl-8 md:pl-10"
       initial={{ opacity: 0, x: -12 }}
       whileInView={{ opacity: 1, x: 0 }}
@@ -179,24 +183,23 @@ export function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
   );
 }
 
-/** Fade + rise on page load (above-the-fold content) */
+/**
+ * Fade + rise on page load (above-the-fold content). Pure CSS (.fade-up in
+ * globals.css), so the hero paints on first render instead of waiting for
+ * JavaScript to hydrate: it holds the page's LCP element.
+ */
 export function FadeIn({
   children,
   delay = 0,
-  className,
+  className = "",
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
 }) {
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay, ease }}
-    >
+    <div data-reveal className={`fade-up ${className}`} style={delay ? { animationDelay: `${delay}s` } : undefined}>
       {children}
-    </motion.div>
+    </div>
   );
 }

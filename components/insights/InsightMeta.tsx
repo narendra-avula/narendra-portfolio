@@ -3,7 +3,7 @@ import { formatDate } from "@/lib/insight-date";
 
 export function DraftBadge() {
   return (
-    <span className="inline-flex items-center rounded-md border border-amber-500/40 bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-700 dark:text-amber-300">
+    <span className="inline-flex items-center rounded-md border border-amber-500/40 bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-800 dark:text-amber-300">
       Draft — unpublished
     </span>
   );

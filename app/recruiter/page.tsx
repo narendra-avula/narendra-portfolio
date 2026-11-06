@@ -76,7 +76,7 @@ export default function RecruiterPage() {
                 <a
                   href={c.href}
                   {...(c.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className={`rounded text-accent hover:underline print:text-fg ${focusRing}`}
+                  className={`rounded text-accent underline decoration-accent/40 underline-offset-2 hover:decoration-accent print:text-fg ${focusRing}`}
                 >
                   {c.text}
                 </a>
@@ -161,7 +161,7 @@ export default function RecruiterPage() {
                 {e.verifyUrl && (
                   <>
                     {" · "}
-                    <a href={e.verifyUrl} target="_blank" rel="noopener noreferrer" className={`rounded text-accent hover:underline print:text-fg ${focusRing}`}>
+                    <a href={e.verifyUrl} target="_blank" rel="noopener noreferrer" className={`rounded text-accent underline decoration-accent/40 underline-offset-2 hover:decoration-accent print:text-fg ${focusRing}`}>
                       Verify on Credly
                     </a>
                   </>
