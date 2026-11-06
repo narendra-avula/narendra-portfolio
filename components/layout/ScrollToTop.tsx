@@ -24,7 +24,7 @@ export default function ScrollToTop() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 8 }}
           transition={{ duration: 0.2 }}
-          className="fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-lg border border-line bg-surface text-muted shadow-lg transition-colors hover:text-fg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="print:hidden fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-lg border border-line bg-surface text-muted shadow-lg transition-colors hover:text-fg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           <LuArrowUp className="h-5 w-5" aria-hidden="true" />
         </motion.button>

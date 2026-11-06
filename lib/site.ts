@@ -20,7 +20,7 @@ export const navItems: NavItem[] = [
   { label: "About", href: "/#about", enabled: true },
   { label: "Experience", href: "/#experience", enabled: true },
   { label: "Projects", href: "/projects", enabled: true, section: "projects" },
-  { label: "Architecture", href: "/architecture", enabled: false }, // Phase 5
+  { label: "Architecture", href: "/architecture", enabled: true },
   { label: "Insights", href: "/#insights", enabled: true },
   { label: "Contact", href: "/#contact", enabled: true },
 ];

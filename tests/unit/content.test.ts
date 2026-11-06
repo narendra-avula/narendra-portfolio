@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { profile, yearsLabel } from "@/content/profile";
 import { experiences } from "@/content/experience";
@@ -82,10 +84,12 @@ describe("content integrity", () => {
     expect(aws?.verifyUrl).toMatch(/^https:\/\/www\.credly\.com\/badges\//);
   });
 
-  it("does not expose nav links to routes that are not built yet", () => {
+  it("only exposes nav links to routes that exist", () => {
     const enabled = navItems.filter((n) => n.enabled).map((n) => n.href);
-    expect(enabled).not.toContain("/architecture");
-    enabled.forEach((href) => expect(href.startsWith("/#") || href.startsWith("/")).toBe(true));
+    expect(enabled).toContain("/architecture");
+    for (const href of enabled.filter((h) => !h.startsWith("/#"))) {
+      expect(existsSync(join(process.cwd(), "app", href, "page.tsx")), href).toBe(true);
+    }
   });
 
   it("has a valid canonical site URL without a trailing slash", () => {

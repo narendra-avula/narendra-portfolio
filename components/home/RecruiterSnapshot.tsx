@@ -1,7 +1,8 @@
 import { LuArrowRight, LuBadgeCheck, LuDownload, LuMapPin } from "react-icons/lu";
 import { profile, yearsLabel } from "@/content/profile";
 import { btech, certification, mtech } from "@/content/education";
-import { ButtonLink, Card, Eyebrow, Section, focusRing } from "@/components/ui";
+import Link from "next/link";
+import { ButtonLink, Card, buttonClass, Eyebrow, Section, focusRing } from "@/components/ui";
 import { Reveal } from "@/components/motion";
 
 /** 30-second summary for recruiters. Also hosts the "Open to" card (decision D5). */
@@ -60,11 +61,10 @@ export default function RecruiterSnapshot() {
               ))}
             </dl>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              {/* Points to /recruiter once Recruiter Mode ships (Phase 5) */}
-              <ButtonLink href="#experience" variant="secondary">
+              <Link href="/recruiter" className={buttonClass("secondary")}>
                 View Full Profile
                 <LuArrowRight className="h-4 w-4" aria-hidden="true" />
-              </ButtonLink>
+              </Link>
               <ButtonLink href={profile.resume.href} download={profile.resume.filename}>
                 <LuDownload className="h-4 w-4" aria-hidden="true" />
                 Download Resume

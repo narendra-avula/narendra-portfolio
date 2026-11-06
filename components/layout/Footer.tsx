@@ -12,7 +12,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="border-t border-line bg-surface">
+    <footer className="print:hidden border-t border-line bg-surface">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <p className="font-semibold text-fg">{profile.name}</p>
@@ -54,6 +54,11 @@ export default function Footer() {
                 </a>
               </li>
             ))}
+            <li>
+              <Link href="/recruiter" className={`rounded text-muted hover:text-fg ${focusRing}`}>
+                One-page profile
+              </Link>
+            </li>
             <li>
               <a href={profile.resume.href} download={profile.resume.filename} className={`rounded text-muted hover:text-fg ${focusRing}`}>
                 Resume (PDF)

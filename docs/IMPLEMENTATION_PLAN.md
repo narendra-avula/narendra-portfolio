@@ -134,6 +134,7 @@ Exit: typecheck, lint, build, unit + e2e green; screenshots light/dark/mobile.
 4. Tests: filtering, search, every slug renders, 404 for unknown slug.
 
 ### Phase 5 — Architecture Lab and Recruiter Mode
+Status: done. Pages: RAG pipeline, AI code review pipeline, event-driven microservices, chaos engineering platform. Diagrams are defined as data in `content/architecture.ts` and checked by `validateDiagram()` (`lib/diagram.ts`): no overlapping nodes, no edge crossing a node, no label hiding its arrow.
 1. Accessible SVG diagram system (title/desc, text alternative list, responsive, theme-aware).
 2. Four architecture pages, each labelled illustrative, with flows, boundaries, failure handling, trade-offs.
 3. `/recruiter`: one-page profile from `content/*`, print stylesheet (A4, light, no nav/motion), Print button, contact links.
