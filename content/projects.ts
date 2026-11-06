@@ -1,3 +1,7 @@
+import { caseStudies } from "@/content/case-studies";
+
+export type ProjectArea = "Backend" | "Cloud" | "AI / GenAI";
+
 export type ProjectVisual = "career" | "review" | "resilience" | "learning";
 
 export type Project = {
@@ -12,8 +16,8 @@ export type Project = {
   focusAreas: string[];
   featured: boolean;
   visual?: ProjectVisual;
-  /** Case study pages arrive in Phase 4 */
-  caseStudyReady: boolean;
+  /** Technical areas used by the catalogue filter (kind covers Professional / Personal) */
+  areas: ProjectArea[];
   /** Employer the project was built at (must match an experience company) */
   company?: string;
   client?: string;
@@ -29,12 +33,12 @@ export const projects: Project[] = [
     category: "AI Career Intelligence Platform",
     kind: "Personal",
     summary:
-      "An AI-powered career intelligence and interview preparation platform: resume and job description analysis, skill gap identification, interview preparation and job discovery, built around LLM integrations.",
-    technologies: [],
+      "A career intelligence and interview preparation platform: resume and job description analysis, per-job skill gaps, practice, mock interviews and job discovery, with a provider-agnostic LLM gateway.",
+    technologies: ["Next.js", "TypeScript", "Python", "FastAPI", "PostgreSQL", "LLM gateway"],
     focusAreas: ["Resume & JD analysis", "Skill gaps", "Interview prep", "Job discovery", "LLM integrations"],
     featured: true,
     visual: "career",
-    caseStudyReady: false,
+    areas: ["AI / GenAI", "Backend"],
   },
   {
     slug: "checkmate",
@@ -47,7 +51,7 @@ export const projects: Project[] = [
     focusAreas: ["Automated review", "Static analysis", "Security scanning", "RAG"],
     featured: true,
     visual: "review",
-    caseStudyReady: false,
+    areas: ["AI / GenAI"],
   },
   {
     slug: "enterprise-resiliency-engineering",
@@ -60,7 +64,7 @@ export const projects: Project[] = [
     focusAreas: ["Chaos engineering", "Microservices", "Cloud environments", "Observability"],
     featured: true,
     visual: "resilience",
-    caseStudyReady: false,
+    areas: ["Cloud", "Backend"],
     company: "JPMorgan Chase",
     client: "Internal",
     period: "2022 – Present",
@@ -71,12 +75,12 @@ export const projects: Project[] = [
     category: "AI Learning Platform",
     kind: "Personal",
     summary:
-      "An AI-powered personal learning and academic knowledge platform for organizing course content, learning workflows and assessments.",
-    technologies: [],
+      "A personal AI learning environment: curriculum and study plans, a document library processed into a personal knowledge base, and a cited AI tutor in development.",
+    technologies: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "pgvector", "Celery"],
     focusAreas: ["Content organization", "Learning workflows", "AI-assisted learning", "Assessments"],
     featured: true,
     visual: "learning",
-    caseStudyReady: false,
+    areas: ["AI / GenAI", "Backend"],
   },
   {
     slug: "telecom-bss-platform",
@@ -88,7 +92,7 @@ export const projects: Project[] = [
     technologies: ["Python", "Django", "Django REST Framework", "Microservices", "RabbitMQ", "Linux", "Shell Scripting"],
     focusAreas: [],
     featured: false,
-    caseStudyReady: false,
+    areas: ["Backend"],
     company: "Qvantel Software Solutions",
     client: "Ericsson",
     period: "2020 – 2022",
@@ -109,7 +113,7 @@ export const projects: Project[] = [
     technologies: ["Python", "Django", "Angular", "TypeScript", "Ionic", "MySQL", "MongoDB", "AWS"],
     focusAreas: [],
     featured: false,
-    caseStudyReady: false,
+    areas: ["Backend"],
     company: "CustomFurnish / Hinshitsu Manufacturing",
     client: "Medplus",
     period: "2019 – 2020",
@@ -130,7 +134,7 @@ export const projects: Project[] = [
     technologies: ["Python", "Django", "Angular", "TypeScript", "MongoDB", "AWS"],
     focusAreas: [],
     featured: false,
-    caseStudyReady: false,
+    areas: ["Backend"],
     company: "CustomFurnish / Hinshitsu Manufacturing",
     period: "2019",
     highlights: [
@@ -148,7 +152,7 @@ export const projects: Project[] = [
     technologies: ["Python", "Django", "jQuery", "MongoDB", "Linux", "AWS"],
     focusAreas: [],
     featured: false,
-    caseStudyReady: false,
+    areas: ["Backend"],
     company: "CustomFurnish / Hinshitsu Manufacturing",
     period: "2017 – 2019",
     highlights: [
@@ -168,7 +172,7 @@ export const projects: Project[] = [
     technologies: ["Python", "Django", "jQuery", "MongoDB", "Linux", "AWS"],
     focusAreas: [],
     featured: false,
-    caseStudyReady: false,
+    areas: ["Backend"],
     company: "CustomFurnish / Hinshitsu Manufacturing",
     period: "2016 – 2020",
     highlights: [
@@ -186,7 +190,7 @@ export const projects: Project[] = [
     technologies: ["Python", "Django", "jQuery", "MySQL", "MongoDB", "AWS"],
     focusAreas: [],
     featured: false,
-    caseStudyReady: false,
+    areas: ["Backend"],
     company: "CustomFurnish / Hinshitsu Manufacturing",
     period: "2015 – 2016",
     highlights: [
@@ -196,6 +200,8 @@ export const projects: Project[] = [
   },
 ];
 
+export const hasCaseStudy = (slug: string) => slug in caseStudies;
+export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
 export const featuredProjects = projects.filter((p) => p.featured);
 export const otherProjects = projects.filter((p) => !p.featured);
 export const projectsAt = (company: string) => projects.filter((p) => p.company === company);

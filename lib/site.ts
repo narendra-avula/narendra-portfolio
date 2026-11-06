@@ -11,13 +11,15 @@ export type NavItem = {
   href: string;
   /** Hidden until the route exists, so the nav never links to a 404 */
   enabled: boolean;
+  /** Homepage section that also marks this item active */
+  section?: string;
 };
 
 export const navItems: NavItem[] = [
   { label: "Home", href: "/#top", enabled: true },
   { label: "About", href: "/#about", enabled: true },
   { label: "Experience", href: "/#experience", enabled: true },
-  { label: "Projects", href: "/#projects", enabled: true },
+  { label: "Projects", href: "/projects", enabled: true, section: "projects" },
   { label: "Architecture", href: "/architecture", enabled: false }, // Phase 5
   { label: "Insights", href: "/#insights", enabled: true },
   { label: "Contact", href: "/#contact", enabled: true },

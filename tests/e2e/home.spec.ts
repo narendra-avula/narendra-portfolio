@@ -33,13 +33,17 @@ test.describe("homepage", () => {
     expect(body).not.toMatch(/tabular-nums">0</);
   });
 
-  test("features the four brief projects without fake case-study links", async ({ page }) => {
+  test("features the four brief projects; only written case studies are links", async ({ page }) => {
     await page.goto("/");
     const projects = page.locator("#projects");
     for (const t of ["PrepForge", "CheckMate", "Enterprise Resiliency Engineering", "PrepForge Academic Hub"]) {
       await expect(projects.getByRole("heading", { level: 3, name: t, exact: true })).toBeVisible();
     }
-    await expect(projects.getByRole("link", { name: /case study/i })).toHaveCount(0);
+    for (const slug of ["prepforge", "enterprise-resiliency-engineering", "prepforge-academic-hub"]) {
+      await expect(projects.locator(`a[href="/projects/${slug}"]`)).toHaveCount(1);
+    }
+    await expect(projects.locator('a[href="/projects/checkmate"]')).toHaveCount(0);
+    await expect(projects.getByRole("link", { name: "View all projects" })).toHaveAttribute("href", "/projects");
   });
 
   test("defaults to dark theme and the toggle persists light", async ({ page }) => {
@@ -74,8 +78,8 @@ test.describe("navigation", () => {
     await page.goto("/");
     const nav = page.getByRole("navigation", { name: "Primary" });
     const hrefs = await nav.locator("ul a").evaluateAll((as) => as.map((a) => a.getAttribute("href")!));
-    expect(hrefs).toEqual(["/#top", "/#about", "/#experience", "/#projects", "/#insights", "/#contact"]);
-    for (const href of hrefs) {
+    expect(hrefs).toEqual(["/#top", "/#about", "/#experience", "/projects", "/#insights", "/#contact"]);
+    for (const href of hrefs.filter((h) => h.startsWith("/#"))) {
       await expect(page.locator(href.slice(1))).toHaveCount(1);
     }
     await expect(nav.getByRole("link", { name: "Download Resume" })).toHaveAttribute("download", /\.pdf$/);
@@ -117,6 +121,8 @@ test.describe("SEO", () => {
     expect(robots).toContain("Sitemap: https://narendra-portfolio-woad.vercel.app/sitemap.xml");
     const sitemap = await (await request.get("/sitemap.xml")).text();
     expect(sitemap).toContain("<loc>https://narendra-portfolio-woad.vercel.app/</loc>");
+    expect(sitemap).toContain("<loc>https://narendra-portfolio-woad.vercel.app/projects/prepforge</loc>");
+    expect(sitemap).not.toContain("/projects/checkmate");
   });
 });
 

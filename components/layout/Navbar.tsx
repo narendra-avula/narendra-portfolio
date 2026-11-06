@@ -43,9 +43,10 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const isActive = (href: string) => {
-    const hash = hashOf(href);
-    return hash ? onHome && active === hash : pathname.startsWith(href);
+  const isActive = ({ href, section }: (typeof items)[number]) => {
+    const hash = hashOf(href) ?? section;
+    if (onHome) return active === hash;
+    return !hashOf(href) && pathname.startsWith(href);
   };
 
   return (
@@ -65,7 +66,7 @@ export default function Navbar() {
 
         <ul className="hidden items-center gap-1 text-sm lg:flex">
           {items.map((item) => {
-            const current = isActive(item.href);
+            const current = isActive(item);
             return (
               <li key={item.href}>
                 <Link
@@ -128,7 +129,7 @@ export default function Navbar() {
                   <Link
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    aria-current={isActive(item.href) ? "page" : undefined}
+                    aria-current={isActive(item) ? "page" : undefined}
                     className={`flex min-h-12 items-center border-b border-line text-sm font-medium text-muted transition-colors hover:text-fg aria-[current=page]:text-fg ${focusRing}`}
                   >
                     {item.label}

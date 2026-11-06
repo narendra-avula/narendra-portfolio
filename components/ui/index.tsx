@@ -104,6 +104,10 @@ const buttonStyles: Record<ButtonVariant, string> = {
   ghost: "text-muted hover:text-fg",
 };
 
+/** Classes for a button-styled link; use with next/link for internal routes */
+export const buttonClass = (variant: ButtonVariant = "primary", className = "") =>
+  `inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium transition-[background-color,opacity,color] duration-200 ${buttonStyles[variant]} ${focusRing} ${className}`;
+
 export function ButtonLink({
   variant = "primary",
   className = "",
@@ -111,10 +115,7 @@ export function ButtonLink({
   ...props
 }: ComponentProps<"a"> & { variant?: ButtonVariant }) {
   return (
-    <a
-      {...props}
-      className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium transition-[background-color,opacity,color] duration-200 ${buttonStyles[variant]} ${focusRing} ${className}`}
-    >
+    <a {...props} className={buttonClass(variant, className)}>
       {children}
     </a>
   );

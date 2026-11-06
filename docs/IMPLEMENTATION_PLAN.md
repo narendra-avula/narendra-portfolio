@@ -10,7 +10,7 @@ Companion to `docs/PORTFOLIO_AUDIT.md`. Each phase ends with typecheck, lint, pr
 | --- | --- | --- | --- |
 | D1 | Canonical domain (narendraavula.com does not resolve) | Use `https://narendra-portfolio-woad.vercel.app` now via one `SITE_URL` setting; switch when the domain is connected | Phase 2 (quick fix), Phase 6 |
 | D2 | Updated resume PDF (current one says 9 yrs / SE II and shows phone number) | Owner supplies an updated PDF; site links stay at `/resume.pdf` | Phase 3 |
-| D3 | PrepForge / Academic Hub / CheckMate content | Allow reading private repos `prepforge`, `prepforge-academic`, `prepforge-evals`; point to CheckMate source | Phase 4 |
+| D3 | PrepForge / Academic Hub / CheckMate content | Done for PrepForge and Academic Hub (read from their private repos). **CheckMate open:** no repo found; its card stays without a case study until the owner points to a source | Phase 4 |
 | D4 | Contact form delivery | Resend (free tier) via a Server Action, key stored as a Vercel env var; without a key the form is hidden and mailto is shown | Phase 6 |
 | D5 | Existing sections not in the brief's homepage order (Open to, Now, GitHub, Testimonials) | Open to → Recruiter Snapshot; Now → Professional Summary; GitHub → Engineering Impact; Testimonials → after Experience (still hidden while empty) | Phase 2 |
 | D6 | Light theme | Dark by default, keep the toggle | Phase 2 |
