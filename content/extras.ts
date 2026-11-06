@@ -64,11 +64,3 @@ export const impact = [
     context: "Personal work",
   },
 ];
-
-export const insightCategories = [
-  "Backend Engineering",
-  "Cloud Engineering",
-  "System Design",
-  "AI / GenAI",
-  "Software Architecture",
-];

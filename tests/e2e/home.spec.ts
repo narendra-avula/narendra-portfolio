@@ -78,7 +78,7 @@ test.describe("navigation", () => {
     await page.goto("/");
     const nav = page.getByRole("navigation", { name: "Primary" });
     const hrefs = await nav.locator("ul a").evaluateAll((as) => as.map((a) => a.getAttribute("href")!));
-    expect(hrefs).toEqual(["/#top", "/#about", "/#experience", "/projects", "/architecture", "/#insights", "/#contact"]);
+    expect(hrefs).toEqual(["/#top", "/#about", "/#experience", "/projects", "/architecture", "/insights", "/#contact"]);
     for (const href of hrefs.filter((h) => h.startsWith("/#"))) {
       await expect(page.locator(href.slice(1))).toHaveCount(1);
     }

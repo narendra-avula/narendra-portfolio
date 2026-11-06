@@ -11,6 +11,8 @@ import { impact } from "@/content/extras";
 import { SITE_URL } from "@/lib/site";
 import { ButtonLink, Container, focusRing } from "@/components/ui";
 import PrintButton from "@/components/recruiter/PrintButton";
+import TrackView from "@/components/analytics/TrackView";
+import { analyticsEvents } from "@/lib/analytics";
 
 const description = `One-page profile of ${profile.name}: ${profile.designation} at ${profile.employer}, ${yearsLabel} years of experience. Printable.`;
 
@@ -46,6 +48,7 @@ export default function RecruiterPage() {
 
   return (
     <article className="py-12 md:py-16 print:py-0" aria-labelledby="recruiter-title">
+      <TrackView event={analyticsEvents.recruiterVisit} />
       <Container className="max-w-4xl">
         <div className="mb-8 flex flex-wrap gap-3 print:hidden">
           <PrintButton />

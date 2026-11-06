@@ -2,13 +2,17 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { LuArrowUpRight, LuFileText, LuMail } from "react-icons/lu";
 import { profile } from "@/content/profile";
 import { Card, Section, SectionHeader, focusRing } from "@/components/ui";
-import { Stagger, StaggerItem } from "@/components/motion";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion";
+import { isContactFormEnabled } from "@/lib/email";
+import ContactForm from "@/components/home/ContactForm";
 
 /**
- * Contact channels. The contact form arrives in Phase 6 with a real email
- * provider (decision D4); no form is shown until submissions are delivered.
+ * Contact channels, plus a form when an email provider is configured
+ * (decision D4). Without RESEND_API_KEY the form is not rendered at all, so
+ * a visitor can never submit a message that goes nowhere.
  */
 export default function Contact() {
+  const formEnabled = isContactFormEnabled();
   const channels = [
     {
       label: "Email",
@@ -49,7 +53,8 @@ export default function Contact() {
         lead="Open to conversations about senior backend, platform, reliability and AI engineering roles."
       />
 
-      <Stagger className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className={formEnabled ? "mt-12 grid gap-8 lg:grid-cols-[1fr_1.15fr] lg:items-start" : "mt-12"}>
+      <Stagger className={formEnabled ? "grid content-start gap-4 sm:grid-cols-2 lg:grid-cols-1" : "grid gap-4 sm:grid-cols-2 lg:grid-cols-4"}>
         {channels.map(({ label, value, href, Icon, external, download }) => (
           <StaggerItem key={label}>
             <Card interactive className="h-full">
@@ -70,6 +75,14 @@ export default function Contact() {
           </StaggerItem>
         ))}
       </Stagger>
+        {formEnabled && (
+          <Reveal>
+            <Card className="p-6 md:p-8">
+              <ContactForm email={profile.email} />
+            </Card>
+          </Reveal>
+        )}
+      </div>
     </Section>
   );
 }

@@ -141,6 +141,7 @@ Status: done. Pages: RAG pipeline, AI code review pipeline, event-driven microse
 4. Tests: recruiter page renders all facts; print media snapshot.
 
 ### Phase 6 — Insights, analytics, SEO, contact form
+Status: done. Articles are `content/insights/<slug>.mdx` with metadata in `content/insights.ts`; reading time and TOC are derived from the MDX (`lib/insights.ts`). Drafts are hidden in production and shown in `next dev` or with `SHOW_DRAFTS=true` (e2e). Analytics load only on Vercel (`VERCEL=1`); resume/GitHub/LinkedIn clicks are tracked from link hrefs (`lib/analytics.ts`). Contact delivery calls Resend's HTTP API directly (no `resend` package); env: `RESEND_API_KEY` (required, else the form is hidden), `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`.
 1. MDX setup, `/insights` (categories, search, reading time), `/insights/[slug]` (TOC, related), drafts flagged (D7).
 2. Vercel Analytics + custom events (resume download, project visit, recruiter visit, GitHub/LinkedIn click, contact submit).
 3. SEO: per-route metadata, canonical URLs, Person + WebSite JSON-LD, sitemap from content, `app/robots.ts`.

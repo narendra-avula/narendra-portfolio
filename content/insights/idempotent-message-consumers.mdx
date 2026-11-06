@@ -1,0 +1,70 @@
+Message brokers make services easier to decouple, but they come with a promise that surprises people the first time they read it closely: a message will be delivered **at least once**. Not exactly once. A consumer that cannot cope with seeing the same message twice will, sooner or later, charge a customer twice, send two emails or apply the same state change twice.
+
+This article looks at where duplicates come from and the patterns that make a consumer safe to run against them.
+
+## Where duplicates come from
+
+With RabbitMQ, a consumer acknowledges a message after it has processed it. If the acknowledgement never reaches the broker, the broker assumes the work was not done and redelivers the message. That happens more often than it sounds:
+
+- The consumer finishes its work, then crashes or is redeployed before it sends the ack.
+- The network connection drops between the side effect and the ack.
+- A consumer takes longer than the delivery timeout, and the broker hands the message to someone else.
+- A publisher retries after a timeout, not knowing that the first publish succeeded.
+
+None of these are bugs in the broker. They are the cost of never losing a message. The consumer has to absorb them.
+
+## Make the effect idempotent, not the handler
+
+An operation is idempotent when applying it twice leaves the system in the same state as applying it once. Some operations are naturally idempotent: "set the order status to `SHIPPED`" can run many times. Others are not: "add 100 to the balance" or "send the invoice email".
+
+The goal is not to stop the handler from running twice; you cannot guarantee that. The goal is that running it twice has no extra effect.
+
+## Pattern 1: an idempotency key with a processed-messages table
+
+Give every message a stable identifier set by the producer, such as an event id or a business key like `payment:<payment_id>`. The consumer records each identifier it has processed, **in the same database transaction** as the side effect:
+
+```python
+from django.db import IntegrityError, transaction
+
+def handle_payment_captured(event):
+    try:
+        with transaction.atomic():
+            ProcessedMessage.objects.create(message_id=event["id"])
+            apply_payment(event)
+    except IntegrityError:
+        # Unique constraint on message_id: already processed, safe to ack
+        return
+```
+
+The unique constraint does the real work. Two concurrent deliveries of the same message race to insert the same row; one wins and the other rolls back. Checking "have I seen this id?" with a `SELECT` before doing the work is not enough, because both deliveries can pass the check before either commits.
+
+This only works when the side effect lives in the same database as the table. For calls to external systems, the next pattern helps.
+
+## Pattern 2: pass the key downstream
+
+Many payment and messaging APIs accept an idempotency key on the request. Reusing the message's identifier as that key means a redelivered message produces a repeated request that the provider recognises and ignores. When the downstream system has no such support, record the outgoing call before making it and reconcile anything left in an "in progress" state.
+
+## Pattern 3: the transactional outbox, on the publishing side
+
+Duplicates and losses also start at the producer. A service that writes to its database and then publishes an event can fail between the two steps, leaving the database updated and no event sent. The outbox pattern writes the event to an `outbox` table in the same transaction as the business change, and a separate relay publishes rows from that table. The relay can itself publish twice, which is fine, because the consumers are idempotent.
+
+## Retries, dead-letter queues and poison messages
+
+Idempotency makes retries safe, but retries still need limits. A message that fails because of a bug or bad data will fail forever, and retrying it immediately in a loop blocks the queue behind it.
+
+A common setup with RabbitMQ:
+
+1. On a transient failure, reject the message so it moves to a retry queue with a message TTL, which returns it to the main queue after a delay.
+2. Count attempts in a header; after a fixed number, route the message to a dead-letter queue instead.
+3. Alert on the dead-letter queue's depth, and give the team a tool to inspect and replay its messages once the cause is fixed.
+
+Replaying from a dead-letter queue is only safe because the consumer is idempotent. The patterns support each other.
+
+## A checklist for a new consumer
+
+- Every message carries a stable, producer-assigned identifier.
+- The side effect and the "processed" record commit in one transaction, protected by a unique constraint.
+- External calls carry an idempotency key derived from the message.
+- The message is acknowledged only after the work commits.
+- Retries have a delay and a limit; exhausted messages go to a monitored dead-letter queue.
+- There is a test that delivers the same message twice and asserts on the end state.

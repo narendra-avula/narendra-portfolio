@@ -9,6 +9,8 @@ import { Container, Eyebrow, ExternalLink, TagList, focusRing } from "@/componen
 import { Reveal } from "@/components/motion";
 import ArchitectureDiagram from "@/components/projects/ArchitectureDiagram";
 import StatusBadge from "@/components/projects/StatusBadge";
+import TrackView from "@/components/analytics/TrackView";
+import { analyticsEvents } from "@/lib/analytics";
 
 const slugs = Object.keys(caseStudies);
 
@@ -145,6 +147,7 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
 
   return (
     <article className="py-12 md:py-20" aria-labelledby="case-study-title">
+      <TrackView event={analyticsEvents.projectVisit} properties={{ project: slug }} />
       <Container>
         <Link
           href="/projects"

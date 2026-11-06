@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { architectures } from "@/content/architecture";
 import { caseStudies } from "@/content/case-studies";
+import { getPublishedInsights } from "@/lib/insights";
 import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -13,6 +14,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE_URL}/architecture/${slug}`,
       lastModified,
       changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+    { url: `${SITE_URL}/insights`, lastModified, changeFrequency: "weekly", priority: 0.7 },
+    // Published only: drafts never appear in the sitemap (decision D7)
+    ...getPublishedInsights().map(({ slug, published, updated }) => ({
+      url: `${SITE_URL}/insights/${slug}`,
+      lastModified: new Date(updated ?? published ?? lastModified),
+      changeFrequency: "yearly" as const,
       priority: 0.6,
     })),
     { url: `${SITE_URL}/recruiter`, lastModified, changeFrequency: "monthly", priority: 0.8 },

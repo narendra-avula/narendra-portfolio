@@ -1,13 +1,15 @@
-import { LuPenLine } from "react-icons/lu";
-import { insightCategories } from "@/content/extras";
-import { Card, Section, SectionHeader } from "@/components/ui";
-import { Reveal } from "@/components/motion";
+import Link from "next/link";
+import { LuArrowRight } from "react-icons/lu";
+import { getPublishedInsights, toSummary } from "@/lib/insights";
+import { Section, SectionHeader, focusRing } from "@/components/ui";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion";
+import InsightCard from "@/components/insights/InsightCard";
+import InsightsEmpty from "@/components/insights/InsightsEmpty";
 
-/**
- * No articles are published yet (decision D7), so this section shows the
- * planned categories honestly instead of placeholder articles.
- */
+/** Latest published articles only; drafts never reach the homepage (decision D7) */
 export default function Insights() {
+  const latest = getPublishedInsights().slice(0, 3).map(toSummary);
+
   return (
     <Section id="insights">
       <SectionHeader
@@ -16,28 +18,28 @@ export default function Insights() {
         lead="Technical writing on backend engineering, cloud, system design and applied AI."
       />
 
-      <Reveal className="mt-12">
-        <Card className="flex flex-col gap-6 p-6 md:flex-row md:items-center md:justify-between md:p-8">
-          <div className="flex items-start gap-4">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-line bg-surface-2 text-accent">
-              <LuPenLine className="h-5 w-5" aria-hidden="true" />
-            </span>
-            <div>
-              <p className="font-semibold text-fg">First articles are in progress</p>
-              <p className="mt-1 text-[15px] leading-7 text-muted">
-                Published articles will appear here as they go live.
-              </p>
-            </div>
-          </div>
-          <ul aria-label="Planned categories" className="flex flex-wrap gap-2 md:max-w-md md:justify-end">
-            {insightCategories.map((c) => (
-              <li key={c} className="rounded-md border border-line bg-surface-2 px-2.5 py-1 text-xs font-medium text-muted">
-                {c}
-              </li>
+      {latest.length > 0 ? (
+        <>
+          <Stagger className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {latest.map((i) => (
+              <StaggerItem key={i.slug} className="h-full">
+                <InsightCard insight={i} />
+              </StaggerItem>
             ))}
-          </ul>
-        </Card>
-      </Reveal>
+          </Stagger>
+          <Link
+            href="/insights"
+            className={`mt-8 inline-flex items-center gap-1.5 rounded text-sm font-medium text-accent hover:text-fg ${focusRing}`}
+          >
+            All insights
+            <LuArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </>
+      ) : (
+        <Reveal className="mt-12">
+          <InsightsEmpty />
+        </Reveal>
+      )}
     </Section>
   );
 }

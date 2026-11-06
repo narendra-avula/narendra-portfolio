@@ -7,6 +7,9 @@ import { MotionProvider, ScrollProgress } from "@/components/motion";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ScrollToTop from "@/components/layout/ScrollToTop";
+import JsonLd from "@/components/JsonLd";
+import SiteAnalytics from "@/components/analytics/SiteAnalytics";
+import { personJsonLd, websiteJsonLd } from "@/lib/structured-data";
 
 const geistSans = Geist({ subsets: ["latin"], variable: "--font-geist-sans", display: "swap" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
@@ -44,6 +47,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className={`dark ${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <JsonLd data={[personJsonLd(), websiteJsonLd()]} />
       </head>
       <body>
         <a
@@ -61,6 +65,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <Footer />
           <ScrollToTop />
         </MotionProvider>
+        <SiteAnalytics enabled={process.env.VERCEL === "1"} />
       </body>
     </html>
   );
