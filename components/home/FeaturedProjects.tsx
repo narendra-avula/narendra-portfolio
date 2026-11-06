@@ -1,7 +1,7 @@
 import type { IconType } from "react-icons";
 import { LuActivity, LuBriefcase, LuGitPullRequest, LuGraduationCap, LuClock } from "react-icons/lu";
 import { featuredProjects, otherProjects, type Project, type ProjectVisual } from "@/content/projects";
-import { Card, Section, SectionHeader, TagList } from "@/components/ui";
+import { Card, Section, SectionHeader, TagList, focusRing } from "@/components/ui";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 
 const visuals: Record<ProjectVisual, { Icon: IconType; nodes: [number, number][] }> = {
@@ -105,20 +105,15 @@ export default function FeaturedProjects() {
         ))}
       </Stagger>
 
-      <Reveal className="mt-12">
-        <h3 className="text-sm font-semibold text-fg">More professional projects</h3>
-        <ul className="mt-4 grid gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-2">
-          {otherProjects.map((p) => (
-            <li key={p.slug} className="bg-surface p-5">
-              <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <p className="font-medium text-fg">{p.title}</p>
-                <p className="text-xs text-subtle">{p.category}</p>
-              </div>
-              <p className="mt-2 text-sm leading-6 text-muted">{p.summary}</p>
-              <p className="mt-2 font-mono text-xs text-subtle">{p.technologies.join(" · ")}</p>
-            </li>
-          ))}
-        </ul>
+      <Reveal className="mt-10">
+        <p className="text-[15px] text-muted">
+          {otherProjects.length} more professional projects, including work for Ericsson and Medplus, are listed under
+          each role in{" "}
+          <a href="#experience" className={`rounded font-medium text-accent hover:underline ${focusRing}`}>
+            Experience
+          </a>
+          .
+        </p>
       </Reveal>
     </Section>
   );

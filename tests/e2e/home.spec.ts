@@ -119,3 +119,27 @@ test.describe("SEO", () => {
     expect(sitemap).toContain("<loc>https://narendra-portfolio-woad.vercel.app/</loc>");
   });
 });
+
+test.describe("experience", () => {
+  test("each role shows context, responsibilities and expandable projects", async ({ page }) => {
+    await page.goto("/");
+    const exp = page.locator("#experience");
+    for (const company of ["JPMorgan Chase", "Qvantel Software Solutions", "CustomFurnish / Hinshitsu Manufacturing"]) {
+      await expect(exp.getByRole("list", { name: `Responsibilities at ${company}` })).toBeVisible();
+    }
+    const qvantel = exp.locator("details", { hasText: "Projects at Qvantel" });
+    await expect(qvantel.getByText("Developed five major features for the BSS platform.")).toBeHidden();
+    await qvantel.locator("summary").click();
+    await expect(qvantel.getByText("Developed five major features for the BSS platform.")).toBeVisible();
+    await expect(qvantel.getByText("Client: Ericsson")).toBeVisible();
+  });
+
+  test("project details are keyboard accessible", async ({ page, isMobile }) => {
+    test.skip(isMobile, "keyboard flow is desktop-only");
+    await page.goto("/");
+    const summary = page.locator("#experience details", { hasText: "Projects at CustomFurnish" }).locator("summary");
+    await summary.focus();
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("heading", { name: "BatchTag.com", level: 4 })).toBeVisible();
+  });
+});

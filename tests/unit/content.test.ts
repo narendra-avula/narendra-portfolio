@@ -30,10 +30,30 @@ describe("content integrity", () => {
   });
 
   it("keeps every v1 project (nothing deleted)", () => {
-    const titles = projects.map((p) => p.title);
-    for (const t of ["Telecom BSS Platform", "Operations Management Platform", "Custom Sofa E-commerce", "Product Marketplace"]) {
-      expect(titles).toContain(t);
+    const slugs = projects.map((p) => p.slug);
+    for (const slug of ["telecom-bss-platform", "operations-management-platform", "custom-sofa-ecommerce", "product-marketplace"]) {
+      expect(slugs).toContain(slug);
     }
+  });
+
+  it("links every professional project to a real employer", () => {
+    const companies = experiences.map((e) => e.company);
+    projects
+      .filter((p) => p.kind === "Professional")
+      .forEach((p) => expect(companies, p.slug).toContain(p.company));
+  });
+
+  it("gives every role business context and responsibilities", () => {
+    experiences.forEach((e) => {
+      expect(e.businessContext.length, e.company).toBeGreaterThan(20);
+      expect(e.responsibilities.length, e.company).toBeGreaterThanOrEqual(3);
+    });
+  });
+
+  it("only uses the one verified number in contributions", () => {
+    const text = projects.flatMap((p) => p.highlights ?? []).join(" ");
+    // digits allowed only in the resume-verified "five major features" or version-like tokens
+    expect(text.match(/\d+%|\d+x|\d{2,}\+? (users|customers|requests)/gi)).toBeNull();
   });
 
   it("has unique project slugs", () => {
