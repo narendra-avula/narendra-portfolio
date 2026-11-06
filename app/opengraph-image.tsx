@@ -1,6 +1,8 @@
 import { ImageResponse } from "next/og";
+import { profile, yearsLabel } from "@/content/profile";
+import { SITE_URL } from "@/lib/site";
 
-export const alt = "Narendra Avula — Software Engineer · Cloud · AI";
+export const alt = `${profile.name} — ${profile.positioning}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -15,7 +17,7 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 80,
-          background: "#09090b",
+          background: "#0a0d14",
           backgroundImage:
             "radial-gradient(circle at 85% 15%, rgba(124,58,237,0.45), transparent 45%), radial-gradient(circle at 10% 95%, rgba(37,99,235,0.45), transparent 45%)",
           color: "white",
@@ -37,18 +39,18 @@ export default function OpengraphImage() {
           >
             NA
           </div>
-          <div style={{ fontSize: 28, color: "#a1a1aa" }}>narendraavula.com</div>
+          <div style={{ fontSize: 28, color: "#a1a1aa" }}>{new URL(SITE_URL).host}</div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 84, fontWeight: 700, letterSpacing: -3 }}>Narendra Avula</div>
-          <div style={{ marginTop: 16, fontSize: 40, color: "#c4b5fd" }}>
-            Software Engineer · Cloud · AI
+          <div style={{ fontSize: 84, fontWeight: 700, letterSpacing: -3 }}>{profile.name}</div>
+          <div style={{ marginTop: 16, fontSize: 34, color: "#9db8ff" }}>
+            {profile.positioning}
           </div>
         </div>
 
         <div style={{ display: "flex", gap: 16, fontSize: 24, color: "#d4d4d8" }}>
-          {["11+ years", "Python · Django", "Resiliency Engineering", "GenAI & RAG"].map((t) => (
+          {[`${yearsLabel} years`, profile.designation, profile.employer, "AWS Certified"].map((t) => (
             <div
               key={t}
               style={{

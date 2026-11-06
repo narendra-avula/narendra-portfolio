@@ -1,0 +1,64 @@
+Chaos engineering has an image problem. Described loosely, "we break production on purpose" sounds reckless, and an experiment run without structure can be exactly that. Run with structure, it is one of the most direct ways to find out whether a system behaves the way its architecture diagram claims.
+
+What follows is a structure for experiments that application teams can trust: they know what will happen, how far it can spread, and when it will stop.
+
+## Start from a steady-state hypothesis
+
+An experiment is a test of a hypothesis, not a random fault. Before injecting anything, write down what "healthy" means in measurable terms, and what you expect to remain true while the fault is active:
+
+> While one of the three instances of the orders service is terminated, the checkout success rate stays within its normal range and p99 latency stays under the service's objective.
+
+The hypothesis forces two useful questions early. Do we have the metrics to measure steady state? And do we agree on what normal looks like? If the answer to either is no, fixing observability is the first finding, before any fault is injected.
+
+## Choose a fault that matches a real risk
+
+Good experiments reproduce failures that have happened, or that the architecture claims to tolerate:
+
+- An instance, container or availability zone disappears.
+- A dependency becomes slow rather than failing outright, which is often harder for systems to handle.
+- A dependency returns errors for a percentage of requests.
+- Network latency or packet loss appears between two services.
+- A disk fills up, or CPU is saturated on one host.
+
+Each fault should map to a design decision you want to verify: retries with backoff, timeouts, circuit breakers, failover, autoscaling or graceful degradation.
+
+## Bound the blast radius
+
+Trust comes from control. Decide in advance how much of the system the experiment may affect, and start small:
+
+- Begin in a lower environment, then move to production only when the experiment is well understood.
+- Target a fraction of instances or traffic rather than everything.
+- Limit the duration, so a fault cannot outlive the person watching it.
+- Avoid running during peak periods, releases or ongoing incidents.
+
+Widen the scope only after a smaller version has passed.
+
+## Define abort conditions before you start
+
+Every experiment needs a stop button and a rule for pressing it. Abort conditions are thresholds on the same steady-state metrics, for example an error rate or latency limit, or any alert firing on a dependent service. Ideally the tooling checks them and rolls the fault back automatically; at minimum, one named person watches them and has the authority to stop.
+
+Rolling back must also be tested. An experiment whose fault cannot be removed quickly is not ready to run.
+
+## Run it with the team, not to the team
+
+Announce the experiment, its window and its abort conditions to the owning team and to anyone on call for dependent systems. Running experiments alongside the application team turns them into a shared exercise, and the team learns more from watching their own dashboards during a controlled failure than from reading a report afterwards.
+
+## Turn results into changes
+
+The output of an experiment is a short write-up:
+
+- The hypothesis, the fault and its scope.
+- What the metrics showed, including anything surprising.
+- Whether the hypothesis held.
+- Follow-up actions, each with an owner: a missing timeout, an alert that did not fire, a runbook step that was wrong.
+
+An experiment that confirms the hypothesis is still valuable; it becomes a regression check. Repeating it on a schedule, or as part of a release pipeline, catches the day a configuration change quietly removes the resilience it once proved.
+
+## A checklist before running an experiment
+
+- A written steady-state hypothesis with metrics you can see.
+- A fault tied to a specific design decision.
+- A bounded scope and a fixed duration.
+- Abort conditions, a tested rollback, and a named person watching.
+- The owning and dependent teams informed.
+- A place to record results and follow-up actions.

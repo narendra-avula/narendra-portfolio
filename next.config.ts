@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
+const nextConfig: NextConfig = {};
 
-export default nextConfig;
+// Articles are imported from content/insights/*.mdx rather than routed as pages,
+// so pageExtensions stays at its default. No remark/rehype plugins: heading ids
+// come from mdx-components.tsx, which keeps the config Turbopack-safe.
+const withMDX = createMDX({});
+
+export default withMDX(nextConfig);
