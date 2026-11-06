@@ -1,13 +1,28 @@
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
-import { LuMail, LuFileText, LuArrowUpRight } from "react-icons/lu";
+import {
+  LuMail,
+  LuFileText,
+  LuArrowUpRight,
+  LuMapPin,
+  LuBriefcase,
+  LuBadgeCheck,
+  LuQuote,
+  LuBookMarked,
+} from "react-icons/lu";
 import {
   skillsOverview,
   experiences,
   projects,
   skillGroups,
+  openTo,
+  now,
+  credentials,
+  testimonials,
+  github,
 } from "@/app/data";
+import { getContributions, type Contributions } from "@/app/lib/github";
 import {
   ScrollProgress,
   HeroBackground,
@@ -87,9 +102,84 @@ const stats = [
   { value: projects.length, suffix: "", label: "Featured projects" },
 ];
 
+const levelColors = [
+  "bg-zinc-200 dark:bg-zinc-800",
+  "bg-blue-200 dark:bg-blue-950",
+  "bg-blue-400 dark:bg-blue-800",
+  "bg-violet-500 dark:bg-violet-600",
+  "bg-violet-700 dark:bg-violet-400",
+];
+
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+// Month label above the first week of each month
+function monthLabels(weeks: Contributions["weeks"]): string[] {
+  const month = (w: Contributions["weeks"][number]) => {
+    const first = w.find((d) => d !== null);
+    return first ? Number(first.date.slice(5, 7)) - 1 : -1;
+  };
+  return weeks.map((w, i) => {
+    const m = month(w);
+    // Skip the last two columns so the label isn't clipped at the edge
+    const isNew = i === 0 || month(weeks[i - 1]) !== m;
+    return m >= 0 && isNew && i < weeks.length - 2 ? monthNames[m] : "";
+  });
+}
+
+function ContributionGraph({ data }: { data: Contributions }) {
+  const months = monthLabels(data.weeks);
+  const cols = { gridTemplateColumns: `repeat(${data.weeks.length}, minmax(0, 1fr))` };
+
+  return (
+    <div className="overflow-x-auto pb-2">
+      <div className="min-w-[680px]">
+        <div className="grid gap-[3px] text-[10px] text-zinc-500 dark:text-zinc-400" style={cols}>
+          {months.map((m, i) => (
+            <span key={i} className="overflow-visible whitespace-nowrap">
+              {m}
+            </span>
+          ))}
+        </div>
+        <div
+          className="mt-2 grid gap-[3px]"
+          style={cols}
+          role="img"
+          aria-label={`${data.total} GitHub contributions in the last year`}
+        >
+          {data.weeks.map((week, wi) => (
+            <div key={wi} className="grid grid-rows-7 gap-[3px]">
+              {week.map((day, di) =>
+                day ? (
+                  <span
+                    key={di}
+                    title={day.label}
+                    className={`aspect-square w-full rounded-[3px] ${levelColors[day.level] ?? levelColors[0]}`}
+                  />
+                ) : (
+                  <span key={di} className="aspect-square w-full" />
+                )
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="mt-3 flex items-center justify-end gap-1.5 text-[10px] text-zinc-500 dark:text-zinc-400">
+          Less
+          {levelColors.map((c) => (
+            <span key={c} className={`h-[11px] w-[11px] rounded-[3px] ${c}`} />
+          ))}
+          More
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ============================ PAGE ============================ */
 
-export default function Home() {
+export default async function Home() {
+  const contributions = await getContributions(github.username);
+  const aws = credentials[0];
+
   return (
     <main id="top" className="min-h-screen bg-stone-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
       <ScrollProgress />
@@ -210,6 +300,79 @@ export default function Home() {
         </Stagger>
       </section>
 
+      {/* ==================== OPEN TO + NOW ==================== */}
+      <section aria-label="Open to and now" className="border-b border-zinc-200 dark:border-zinc-800">
+        <Stagger className="mx-auto grid max-w-6xl gap-6 px-6 py-16 md:grid-cols-[1fr_1.15fr] md:py-20">
+          {/* Open to */}
+          <StaggerItem>
+            <SpotlightCard className="h-full p-8" color="rgba(34, 197, 94, 0.10)">
+              <div className="flex items-center gap-2.5">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-60 motion-reduce:animate-none" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
+                </span>
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-green-700 dark:text-green-400">
+                  Open to
+                </p>
+              </div>
+
+              <h2 className="mt-4 text-2xl font-bold text-zinc-950 md:text-3xl dark:text-white">
+                Roles I&apos;m interested in
+              </h2>
+
+              <ul className="mt-6 flex flex-wrap gap-2.5">
+                {openTo.roles.map((r) => (
+                  <li
+                    key={r}
+                    className="flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3.5 py-1.5 text-sm font-medium text-zinc-800 dark:border-zinc-700 dark:bg-zinc-800/60 dark:text-zinc-200"
+                  >
+                    <LuBriefcase className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" aria-hidden="true" />
+                    {r}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-zinc-100 pt-5 text-sm text-zinc-600 dark:border-zinc-800 dark:text-zinc-400">
+                <span className="flex items-center gap-1.5">
+                  <LuMapPin className="h-4 w-4" aria-hidden="true" />
+                  {openTo.location}
+                </span>
+                <span>{openTo.workMode}</span>
+              </div>
+
+              <a
+                href="#contact"
+                className={`group mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-zinc-950 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200 ${focusRing}`}
+              >
+                Let&apos;s talk
+                <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+              </a>
+            </SpotlightCard>
+          </StaggerItem>
+
+          {/* Now */}
+          <StaggerItem>
+            <SpotlightCard className="h-full p-8">
+              <div className="flex items-baseline justify-between gap-4">
+                <p className={eyebrow}>Now</p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">Updated {now.updated}</p>
+              </div>
+              <h2 className="mt-4 text-2xl font-bold text-zinc-950 md:text-3xl dark:text-white">
+                What I&apos;m focused on
+              </h2>
+              <dl className="mt-6 space-y-4">
+                {now.items.map((item) => (
+                  <div key={item.label} className="grid gap-1 sm:grid-cols-[7rem_1fr] sm:gap-4">
+                    <dt className="text-sm font-semibold text-zinc-950 dark:text-white">{item.label}</dt>
+                    <dd className="leading-7 text-zinc-600 dark:text-zinc-400">{item.text}</dd>
+                  </div>
+                ))}
+              </dl>
+            </SpotlightCard>
+          </StaggerItem>
+        </Stagger>
+      </section>
+
       {/* ==================== ABOUT ==================== */}
       <section id="about" className="border-b border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
@@ -315,6 +478,34 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ==================== TESTIMONIALS ==================== */}
+      {testimonials.length > 0 && (
+        <section id="testimonials" className="border-b border-zinc-200 dark:border-zinc-800">
+          <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+            <SectionHeader label="Recommendations" title="What colleagues say." />
+            <Stagger className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {testimonials.map((t) => (
+                <StaggerItem key={t.name}>
+                  <SpotlightCard className="flex h-full flex-col p-8">
+                    <LuQuote className="h-7 w-7 text-violet-500 dark:text-violet-400" aria-hidden="true" />
+                    <blockquote className="mt-5 flex-1 text-lg leading-8 text-zinc-700 dark:text-zinc-300">
+                      &ldquo;{t.quote}&rdquo;
+                    </blockquote>
+                    <figcaption className="mt-6 border-t border-zinc-100 pt-5 dark:border-zinc-800">
+                      <p className="font-semibold text-zinc-950 dark:text-white">{t.name}</p>
+                      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t.role}</p>
+                      {t.relationship && (
+                        <p className="mt-1 text-xs text-zinc-400 dark:text-zinc-500">{t.relationship}</p>
+                      )}
+                    </figcaption>
+                  </SpotlightCard>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </div>
+        </section>
+      )}
+
       {/* ==================== PROJECTS ==================== */}
       <section id="projects" className="border-b border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
@@ -341,6 +532,74 @@ export default function Home() {
                     <p className="mt-4 flex-1 leading-7 text-zinc-600 dark:text-zinc-400">{project.description}</p>
                     <Tags list={project.technologies} className="mt-6 border-t border-zinc-100 pt-5 dark:border-zinc-800" />
                   </article>
+                </SpotlightCard>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </section>
+
+      {/* ==================== GITHUB ==================== */}
+      <section id="github" className="border-b border-zinc-200 dark:border-zinc-800">
+        <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+          <SectionHeader
+            label="GitHub"
+            title="Building in public."
+            lead="Experiments, coursework and side projects, outside the day job."
+          />
+
+          {contributions && (
+            <Reveal className="mt-14">
+              <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm md:p-8 dark:border-zinc-800 dark:bg-zinc-900/70">
+                <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+                  <div>
+                    <p className="font-[family-name:var(--font-display)] text-4xl font-bold tracking-tight text-zinc-950 dark:text-white">
+                      <CountUp to={contributions.total} />
+                    </p>
+                    <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">contributions in the last year</p>
+                  </div>
+                  <a
+                    href={`https://github.com/${github.username}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`inline-flex min-h-11 items-center gap-2 rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-800 transition-colors hover:border-zinc-400 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-zinc-600 dark:hover:bg-zinc-800 ${focusRing}`}
+                  >
+                    <FaGithub className="h-4 w-4" aria-hidden="true" />
+                    @{github.username}
+                    <LuArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                </div>
+                <ContributionGraph data={contributions} />
+              </div>
+            </Reveal>
+          )}
+
+          <Stagger className="mt-6 grid gap-6 md:grid-cols-2">
+            {github.featuredRepos.map((repo) => (
+              <StaggerItem key={repo.name}>
+                <SpotlightCard className="h-full">
+                  <a
+                    href={`https://github.com/${github.username}/${repo.name}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block h-full rounded-2xl p-7 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:focus-visible:outline-white"
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="flex items-center gap-2 font-mono text-sm font-semibold text-zinc-950 dark:text-white">
+                        <LuBookMarked className="h-4 w-4 text-zinc-500 dark:text-zinc-400" aria-hidden="true" />
+                        {repo.name}
+                      </span>
+                      <LuArrowUpRight
+                        className="h-4 w-4 text-zinc-400 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <p className="mt-4 leading-7 text-zinc-600 dark:text-zinc-400">{repo.description}</p>
+                    <p className="mt-5 flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
+                      <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: repo.languageColor }} />
+                      {repo.language}
+                    </p>
+                  </a>
                 </SpotlightCard>
               </StaggerItem>
             ))}
@@ -383,12 +642,25 @@ export default function Home() {
               <TimelineItem>
                 <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">Certification</p>
                 <h3 className="mt-3 text-2xl font-bold text-zinc-950 dark:text-white">
-                  AWS Certified Developer — Associate
+                  {aws.name}
                 </h3>
+                <p className="mt-2 text-lg font-medium text-zinc-700 dark:text-zinc-300">{aws.issuer}</p>
                 <p className="mt-5 text-lg leading-8 text-zinc-600 dark:text-zinc-400">
                   Certification focused on developing, deploying, and maintaining
                   applications on AWS.
                 </p>
+                {aws.verifyUrl && (
+                  <a
+                    href={aws.verifyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-[#FF9900]/40 bg-[#FF9900]/10 px-4 py-2 text-sm font-semibold text-zinc-900 transition-colors hover:bg-[#FF9900]/20 dark:text-zinc-100 ${focusRing}`}
+                  >
+                    <LuBadgeCheck className="h-4 w-4 text-[#FF9900]" aria-hidden="true" />
+                    Verify credential
+                    <LuArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                )}
               </TimelineItem>
 
               <TimelineItem>

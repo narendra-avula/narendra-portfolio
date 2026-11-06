@@ -259,3 +259,77 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
 ];
+
+/* ===================== Recruiter-facing extras ===================== */
+
+export const openTo = {
+  roles: [
+    "Senior Software Engineer",
+    "AI / ML Engineer",
+    "Platform / SRE / Reliability",
+    "Backend / API Engineer",
+  ],
+  location: "Hyderabad, India",
+  workMode: "Remote, hybrid or on-site",
+};
+
+export const now = {
+  updated: "November 2026",
+  items: [
+    {
+      label: "Working on",
+      text: "Resiliency and chaos engineering at JPMorgan Chase.",
+    },
+    {
+      label: "Studying",
+      text: "M.Tech in AI & ML at BITS Pilani: deep neural networks and statistical methods.",
+    },
+    {
+      label: "Building",
+      text: "Credit Default Risk Analyzer: comparing ML classifiers on the UCI credit card dataset, with a Streamlit app.",
+    },
+    {
+      label: "Exploring",
+      text: "RAG pipelines and AI-assisted code review tooling.",
+    },
+  ],
+};
+
+export const credentials = [
+  {
+    name: "AWS Certified Developer — Associate",
+    issuer: "Amazon Web Services",
+    verifyUrl: "https://www.credly.com/badges/1117c758-67d8-48be-9a01-b47730ab40cd",
+  },
+];
+
+export type Testimonial = {
+  quote: string;
+  name: string;
+  role: string; // e.g. "Engineering Manager, JPMorgan Chase"
+  relationship?: string; // e.g. "Managed Narendra directly"
+};
+
+// Add 2–3 quotes (for example from LinkedIn recommendations).
+// The section stays hidden while this list is empty.
+export const testimonials: Testimonial[] = [];
+
+export const github = {
+  username: "narendra-avula",
+  featuredRepos: [
+    {
+      name: "credit-default-analyzer",
+      description:
+        "Predicts credit card default risk on the UCI dataset, compares multiple classifiers, and serves predictions through a Streamlit app.",
+      language: "Jupyter Notebook",
+      languageColor: "#DA5B0B",
+    },
+    {
+      name: "narendra-portfolio",
+      description:
+        "This site: Next.js, Tailwind CSS and Motion, with a dark theme and scroll-driven animations.",
+      language: "TypeScript",
+      languageColor: "#3178C6",
+    },
+  ],
+};
