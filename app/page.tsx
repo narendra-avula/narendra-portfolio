@@ -11,130 +11,147 @@ import {
   projects,
   skillGroups,
 } from "@/app/data";
+import {
+  ScrollProgress,
+  HeroBackground,
+  HeroItem,
+  WordReveal,
+  Magnetic,
+  ScrollCue,
+  Reveal,
+  Stagger,
+  StaggerItem,
+  SpotlightCard,
+  Timeline,
+  TimelineItem,
+  Pill,
+} from "@/app/components/motion";
 
 /* ============================ PAGE ============================ */
 
 export default function Home() {
   return (
-    <main id="top" className="min-h-screen bg-stone-50 text-zinc-900">
+    <main id="top" className="min-h-screen bg-stone-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
+      <ScrollProgress />
       <Navbar />
 
       {/* ==================== HERO ==================== */}
-      <section id="home" className="relative overflow-hidden border-b border-zinc-200">
-        {/* Decorative gradient blobs */}
-        <div className="pointer-events-none absolute inset-0 -z-10">
-          <div
-            className="absolute right-0 top-0 h-[560px] w-[560px] -translate-y-1/4 translate-x-1/4 rounded-full blur-3xl"
-            style={{
-              background:
-                "radial-gradient(circle, #dbeafe 0%, transparent 65%)",
-            }}
-          />
-          <div
-            className="absolute bottom-0 left-0 h-[420px] w-[420px] -translate-x-1/4 translate-y-1/4 rounded-full blur-3xl"
-            style={{
-              background:
-                "radial-gradient(circle, #ede9fe 0%, transparent 65%)",
-            }}
-          />
-        </div>
+      <section id="home" className="relative isolate overflow-hidden border-b border-zinc-200 dark:border-zinc-800">
+        <HeroBackground />
 
-        <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+        <div className="mx-auto flex min-h-[calc(100svh-4.5rem)] max-w-6xl flex-col justify-center px-6 py-24 md:py-32">
           <div className="max-w-4xl">
             {/* Status badge */}
-            <div className="animate-fade-up mb-8 inline-flex items-center gap-2.5 rounded-full border border-zinc-200 bg-white px-4 py-1.5 shadow-sm">
+            <HeroItem>
+            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-zinc-200 bg-white px-4 py-1.5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
               <span
-                className="h-2 w-2 rounded-full bg-green-500"
-                style={{ boxShadow: "0 0 0 3px #22c55e2a" }}
-              />
-              <span className="text-xs font-medium text-zinc-600">
+                className="relative flex h-2 w-2"
+              >
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-60 motion-reduce:animate-none" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+              </span>
+              <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
                 Available to connect
               </span>
             </div>
+            </HeroItem>
 
-            <p className="animate-fade-up-1 mb-6 text-sm font-semibold uppercase tracking-[0.25em] text-blue-600">
+            <HeroItem delay={0.1}>
+            <p className="mb-6 text-sm font-semibold uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
               Software Engineer · Cloud · AI
             </p>
+            </HeroItem>
 
-            <h1 className="animate-fade-up-1 text-5xl font-bold tracking-tight text-zinc-950 sm:text-6xl md:text-7xl">
-              Hi, I&apos;m{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-                Narendra Avula.
-              </span>
+            <h1 className="text-5xl font-bold tracking-tight text-zinc-950 sm:text-6xl md:text-7xl dark:text-white">
+              <WordReveal text="Hi, I'm" delay={0.15} />{" "}
+              <WordReveal
+                text="Narendra Avula."
+                delay={0.3}
+                wordClassName="animate-gradient bg-gradient-to-r from-blue-600 via-violet-600 to-blue-600 bg-[length:200%_auto] bg-clip-text text-transparent dark:from-blue-400 dark:via-violet-400 dark:to-blue-400"
+              />
             </h1>
 
-            <h2 className="animate-fade-up-2 mt-6 text-2xl font-semibold leading-tight text-zinc-700 md:text-3xl">
+            <HeroItem delay={0.55}>
+            <h2 className="mt-6 text-2xl font-semibold leading-tight text-zinc-700 md:text-3xl dark:text-zinc-300">
               Senior Software Engineer · AI &amp; Cloud
             </h2>
 
-            <p className="animate-fade-up-2 mt-6 max-w-2xl text-lg leading-8 text-zinc-600">
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-600 dark:text-zinc-400">
               Building reliable software systems and exploring the intersection
               of software engineering, cloud, and Generative AI.
             </p>
+            </HeroItem>
 
-            <div className="animate-fade-up-3 mt-10 flex flex-col gap-4 sm:flex-row">
+            <HeroItem delay={0.7} className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <Magnetic>
               <a
                 href="#projects"
-                className="rounded-full bg-zinc-950 px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
+                className="group inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-zinc-950 px-6 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-zinc-950/10 transition-colors duration-200 hover:bg-zinc-800 sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:bg-white dark:text-zinc-950 dark:shadow-white/5 dark:hover:bg-zinc-200 dark:focus-visible:outline-white"
               >
                 View My Work
+                <span className="transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">→</span>
               </a>
+              </Magnetic>
 
+              <Magnetic>
               <a
                 href="/resume.pdf"
                 download="Narendra_Avula_Resume.pdf"
-                className="rounded-full border border-zinc-300 bg-white px-6 py-3 text-center text-sm font-semibold text-zinc-900 transition hover:border-zinc-400 hover:bg-zinc-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
+                className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-zinc-300 bg-white/80 px-6 py-3 text-center backdrop-blur text-sm font-semibold text-zinc-900 transition hover:border-zinc-400 hover:bg-zinc-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-100 dark:hover:border-zinc-600 dark:hover:bg-zinc-800 dark:focus-visible:outline-white"
               >
                 Download Resume
               </a>
-            </div>
+              </Magnetic>
+            </HeroItem>
 
             {/* Social links */}
-            <div className="animate-fade-up-3 mt-8 flex items-center gap-5">
+            <HeroItem delay={0.85} className="mt-8 flex items-center gap-5">
               <a
                 href="https://www.linkedin.com/in/narendraavula/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-zinc-500 transition hover:text-zinc-900 focus-visible:text-zinc-900 focus-visible:underline"
+                className="flex items-center gap-2 text-sm text-zinc-500 transition hover:text-zinc-900 focus-visible:text-zinc-900 focus-visible:underline dark:text-zinc-400 dark:hover:text-white dark:focus-visible:text-white"
               >
                 <FaLinkedin className="h-4 w-4" aria-hidden="true" />
                 LinkedIn
               </a>
-              <span className="text-zinc-300" aria-hidden="true">·</span>
+              <span className="text-zinc-300 dark:text-zinc-700" aria-hidden="true">·</span>
               <a
                 href="https://github.com/narendra-avula/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-zinc-500 transition hover:text-zinc-900 focus-visible:text-zinc-900 focus-visible:underline"
+                className="flex items-center gap-2 text-sm text-zinc-500 transition hover:text-zinc-900 focus-visible:text-zinc-900 focus-visible:underline dark:text-zinc-400 dark:hover:text-white dark:focus-visible:text-white"
               >
                 <FaGithub className="h-4 w-4" aria-hidden="true" />
                 GitHub
               </a>
-            </div>
+            </HeroItem>
+
+            <ScrollCue />
           </div>
         </div>
       </section>
 
       {/* ==================== ABOUT ==================== */}
-      <section id="about" className="border-b border-zinc-200">
+      <section id="about" className="border-b border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto max-w-6xl px-6 py-20">
           <div className="grid gap-12 md:grid-cols-[1fr_1.5fr]">
-            <div>
+            <Reveal>
               {/* Monogram */}
               <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-violet-600 text-xl font-bold text-white shadow-lg">
                 NA
               </div>
 
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
                 About Me
               </p>
 
-              <h2 className="mt-3 text-3xl font-bold leading-tight text-zinc-950 md:text-4xl">
+              <h2 className="mt-3 text-3xl font-bold leading-tight text-zinc-950 md:text-4xl dark:text-white">
                 Engineering with curiosity.
               </h2>
-            </div>
+            </Reveal>
 
-            <div className="space-y-5 text-lg leading-8 text-zinc-600">
+            <Reveal delay={0.15} className="space-y-5 text-lg leading-8 text-zinc-600 dark:text-zinc-400">
               <p>
                 I&apos;m a software engineer with 11+ years of experience
                 building backend services, web applications, APIs, cloud-based
@@ -152,30 +169,31 @@ export default function Home() {
                 learning, deep learning, large language models, Generative AI,
                 RAG, and AI-assisted developer tooling.
               </p>
-            </div>
+            </Reveal>
           </div>
 
           {/* Current Focus */}
           <div className="mt-20">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
+            <Reveal>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
               Current Focus
             </p>
 
-            <h3 className="mt-3 text-3xl font-bold text-zinc-950">
+            <h3 className="mt-3 text-3xl font-bold text-zinc-950 dark:text-white">
               What I&apos;m interested in
             </h3>
+            </Reveal>
 
-            <div className="mt-10 grid gap-6 md:grid-cols-3">
+            <Stagger className="mt-10 grid gap-6 md:grid-cols-3">
               {skillsOverview.map((skill) => {
                 const Icon = skill.icon;
                 return (
-                  <div
-                    key={skill.title}
-                    className="rounded-2xl border border-zinc-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md"
-                  >
+                  <StaggerItem key={skill.title}>
+                  <SpotlightCard color={`${skill.iconColor}1F`} className="p-7">
+                    <div className="transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6 w-fit">
                     <div
                       className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl"
-                      style={{ backgroundColor: skill.iconBg }}
+                      style={{ backgroundColor: `${skill.iconColor}1A` }}
                     >
                       <Icon
                         className="h-5 w-5"
@@ -183,266 +201,268 @@ export default function Home() {
                         aria-hidden="true"
                       />
                     </div>
+                    </div>
 
-                    <h4 className="text-xl font-semibold text-zinc-950">
+                    <h4 className="text-xl font-semibold text-zinc-950 dark:text-white">
                       {skill.title}
                     </h4>
 
-                    <p className="mt-4 leading-7 text-zinc-600">
+                    <p className="mt-4 leading-7 text-zinc-600 dark:text-zinc-400">
                       {skill.description}
                     </p>
 
-                    <p className="mt-6 border-t border-zinc-100 pt-5 text-sm leading-6 text-zinc-500">
+                    <p className="mt-6 border-t border-zinc-100 pt-5 text-sm leading-6 text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
                       {skill.technologies}
                     </p>
-                  </div>
+                  </SpotlightCard>
+                  </StaggerItem>
                 );
               })}
-            </div>
+            </Stagger>
           </div>
         </div>
       </section>
 
       {/* ==================== EXPERIENCE ==================== */}
-      <section id="experience" className="border-b border-zinc-200">
+      <section id="experience" className="border-b border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
+          <Reveal>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
             Experience
           </p>
 
-          <h2 className="mt-4 max-w-3xl text-4xl font-bold tracking-tight text-zinc-950 md:text-5xl">
+          <h2 className="mt-4 max-w-3xl text-4xl font-bold tracking-tight text-zinc-950 md:text-5xl dark:text-white">
             11+ years of software engineering.
           </h2>
 
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-600">
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-400">
             A journey across e-commerce, telecom, cloud platforms, resiliency
             engineering, and AI-assisted developer tooling.
           </p>
+          </Reveal>
 
-          <div className="mt-16 max-w-5xl space-y-12">
+          <div className="mt-16 max-w-5xl">
+          <Timeline>
+          <div className="space-y-14">
             {experiences.map((exp) => (
-              <article
-                key={exp.company}
-                className={`relative border-l-2 pl-8 ${
-                  exp.current ? "border-blue-500" : "border-zinc-200"
-                }`}
-              >
-                <div
-                  className={`absolute -left-[9px] top-1 h-4 w-4 rounded-full border-4 ${
-                    exp.current
-                      ? "border-blue-600 bg-blue-600 shadow-[0_0_0_4px_#dbeafe]"
-                      : "border-stone-50 bg-blue-500"
-                  }`}
-                />
+              <TimelineItem key={exp.company} highlight={exp.current}>
 
                 <div className="flex flex-wrap items-center gap-3">
-                  <p className="text-sm font-semibold text-blue-600">
+                  <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
                     {exp.period}
                   </p>
                   {exp.current && (
-                    <span className="rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-blue-600">
+                    <span className="rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
                       Current
                     </span>
                   )}
                 </div>
 
-                <h3 className="mt-2 text-2xl font-bold text-zinc-950">
+                <h3 className="mt-2 text-2xl font-bold text-zinc-950 dark:text-white">
                   {exp.role}
                 </h3>
 
-                <h4 className="mt-1 text-lg font-medium text-zinc-700">
+                <h4 className="mt-1 text-lg font-medium text-zinc-700 dark:text-zinc-300">
                   {exp.company}
                 </h4>
 
-                <p className="mt-5 font-semibold text-zinc-900">
+                <p className="mt-5 font-semibold text-zinc-900 dark:text-zinc-100">
                   {exp.domain}
                 </p>
 
-                <p className="mt-3 max-w-3xl text-lg leading-8 text-zinc-600">
+                <p className="mt-3 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-400">
                   {exp.description}
                 </p>
 
-                <p className="mt-5 max-w-3xl text-sm leading-7 text-zinc-500">
+                <p className="mt-5 max-w-3xl text-sm leading-7 text-zinc-500 dark:text-zinc-400">
                   {exp.technologies}
                 </p>
-              </article>
+              </TimelineItem>
             ))}
+          </div>
+          </Timeline>
           </div>
         </div>
       </section>
 
       {/* ==================== PROJECTS ==================== */}
-      <section id="projects" className="border-b border-zinc-200">
+      <section id="projects" className="border-b border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
+          <Reveal>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
             Projects
           </p>
 
-          <h2 className="mt-4 text-4xl font-bold tracking-tight text-zinc-950 md:text-5xl">
+          <h2 className="mt-4 text-4xl font-bold tracking-tight text-zinc-950 md:text-5xl dark:text-white">
             Things I&apos;ve worked on.
           </h2>
 
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-600">
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-400">
             A collection of professional projects and personal explorations
             across software engineering, cloud, reliability, and AI.
           </p>
+          </Reveal>
 
-          <div className="mt-16 grid gap-6 md:grid-cols-2">
+          <Stagger className="mt-16 grid gap-6 md:grid-cols-2">
             {projects.map((project, index) => (
-              <article
-                key={project.title}
-                className="rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md"
-              >
+              <StaggerItem key={project.title}>
+              <SpotlightCard className="p-8">
+              <article>
                 <div className="flex items-center justify-between">
-                  <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-sm font-bold text-transparent">
+                  <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-sm font-bold text-transparent dark:from-blue-400 dark:to-violet-400">
                     {String(index + 1).padStart(2, "0")}
                   </span>
 
-                  <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600">
+                  <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
                     {project.category}
                   </span>
                 </div>
 
-                <h3 className="mt-8 text-2xl font-bold text-zinc-950">
+                <h3 className="mt-8 text-2xl font-bold text-zinc-950 dark:text-white">
                   {project.title}
                 </h3>
 
-                <p className="mt-4 leading-7 text-zinc-600">
+                <p className="mt-4 leading-7 text-zinc-600 dark:text-zinc-400">
                   {project.description}
                 </p>
 
-                <div className="mt-6 border-t border-zinc-100 pt-5">
-                  <p className="text-sm leading-7 text-zinc-500">
+                <div className="mt-6 border-t border-zinc-100 pt-5 dark:border-zinc-800">
+                  <p className="text-sm leading-7 text-zinc-500 dark:text-zinc-400">
                     {project.technologies}
                   </p>
                 </div>
               </article>
+              </SpotlightCard>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       {/* ==================== EDUCATION ==================== */}
-      <section id="education" className="border-b border-zinc-200">
+      <section id="education" className="border-b border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
+          <Reveal>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
             Education
           </p>
 
-          <h2 className="mt-4 text-4xl font-bold tracking-tight text-zinc-950 md:text-5xl">
+          <h2 className="mt-4 text-4xl font-bold tracking-tight text-zinc-950 md:text-5xl dark:text-white">
             Learning never stops.
           </h2>
 
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-600">
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-400">
             My academic background and ongoing learning across software
             engineering, cloud, machine learning, and AI.
           </p>
+          </Reveal>
 
-          <div className="mt-16 max-w-5xl space-y-16">
+          <div className="mt-16 max-w-5xl">
+          <Timeline>
+          <div className="space-y-16">
             {/* B.Tech */}
-            <article className="border-l-2 border-blue-500 pl-8">
-              <p className="text-sm font-semibold text-blue-600">
+            <TimelineItem highlight>
+              <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
                 Undergraduate
               </p>
 
-              <h3 className="mt-3 text-2xl font-bold text-zinc-950">
+              <h3 className="mt-3 text-2xl font-bold text-zinc-950 dark:text-white">
                 Bachelor of Technology — Computer Science & Engineering
               </h3>
 
-              <p className="mt-2 text-lg font-medium text-zinc-700">
+              <p className="mt-2 text-lg font-medium text-zinc-700 dark:text-zinc-300">
                 Anil Neerukonda Institute of Technology & Sciences
               </p>
 
-              <p className="mt-2 text-zinc-500">
+              <p className="mt-2 text-zinc-500 dark:text-zinc-400">
                 Affiliated to Andhra University
               </p>
 
-              <p className="mt-5 text-lg leading-8 text-zinc-600">
+              <p className="mt-5 text-lg leading-8 text-zinc-600 dark:text-zinc-400">
                 Graduated with a CGPA of 7.5, building a foundation in computer
                 science, programming, software development, databases, and
                 engineering fundamentals.
               </p>
-            </article>
+            </TimelineItem>
 
             {/* M.Tech */}
-            <article className="border-l-2 border-zinc-200 pl-8">
-              <p className="text-sm font-semibold text-blue-600">
+            <TimelineItem>
+              <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
                 Postgraduate / Professional Education
               </p>
 
-              <h3 className="mt-3 text-2xl font-bold text-zinc-950">
+              <h3 className="mt-3 text-2xl font-bold text-zinc-950 dark:text-white">
                 M.Tech — Artificial Intelligence & Machine Learning
               </h3>
 
-              <p className="mt-2 text-lg font-medium text-zinc-700">
+              <p className="mt-2 text-lg font-medium text-zinc-700 dark:text-zinc-300">
                 BITS Pilani — Work Integrated Learning Programme
               </p>
 
-              <p className="mt-5 text-lg leading-8 text-zinc-600">
+              <p className="mt-5 text-lg leading-8 text-zinc-600 dark:text-zinc-400">
                 Pursuing advanced studies in mathematical foundations for
                 machine learning, statistical methods, machine learning, deep
                 neural networks, and artificial intelligence.
               </p>
-            </article>
+            </TimelineItem>
 
             {/* AWS */}
-            <article className="border-l-2 border-zinc-200 pl-8">
-              <p className="text-sm font-semibold text-blue-600">
+            <TimelineItem>
+              <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
                 Certification
               </p>
 
-              <h3 className="mt-3 text-2xl font-bold text-zinc-950">
+              <h3 className="mt-3 text-2xl font-bold text-zinc-950 dark:text-white">
                 AWS Certified Developer — Associate
               </h3>
 
-              <p className="mt-5 text-lg leading-8 text-zinc-600">
+              <p className="mt-5 text-lg leading-8 text-zinc-600 dark:text-zinc-400">
                 Certification focused on developing, deploying, and maintaining
                 applications on AWS.
               </p>
-            </article>
+            </TimelineItem>
+          </div>
+          </Timeline>
           </div>
         </div>
       </section>
 
       {/* ==================== SKILLS ==================== */}
-      <section id="skills" className="border-b border-zinc-200">
+      <section id="skills" className="border-b border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
+          <Reveal>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
             Skills
           </p>
 
-          <h2 className="mt-4 text-4xl font-bold tracking-tight text-zinc-950 md:text-5xl">
+          <h2 className="mt-4 text-4xl font-bold tracking-tight text-zinc-950 md:text-5xl dark:text-white">
             Tools and technologies.
           </h2>
 
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-600">
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-400">
             Technologies I&apos;ve worked with throughout my career and areas
             I&apos;m currently exploring.
           </p>
+          </Reveal>
 
-          <div className="mt-16 grid gap-6 md:grid-cols-2">
+          <Stagger className="mt-16 grid gap-6 md:grid-cols-2">
             {skillGroups.map((group) => (
-              <article
-                key={group.title}
-                className="rounded-2xl border border-zinc-200 bg-white p-7 shadow-sm transition duration-300 hover:border-zinc-300 hover:shadow-md"
-              >
+              <StaggerItem key={group.title}>
+              <SpotlightCard className="p-7">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-bold text-zinc-950">
+                  <h3 className="text-xl font-bold text-zinc-950 dark:text-white">
                     {group.title}
                   </h3>
-                  <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-500">
+                  <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
                     {group.skills.length}
                   </span>
                 </div>
 
                 <div className="mt-6 flex flex-wrap gap-2.5">
                   {group.skills.map(({ name, icon: Icon, color }) => (
-                    <span
-                      key={name}
-                      className="flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 py-1.5 pl-1.5 pr-3.5 text-sm text-zinc-700 transition hover:border-zinc-300 hover:bg-white"
-                    >
+                    <Pill key={name}>
                       <span
-                        className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
+                        className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full dark:bg-zinc-100!"
                         style={{
                           backgroundColor: color ? `${color}1A` : "#F4F4F5",
                         }}
@@ -454,36 +474,41 @@ export default function Home() {
                         />
                       </span>
                       <span className="font-medium">{name}</span>
-                    </span>
+                    </Pill>
                   ))}
                 </div>
-              </article>
+              </SpotlightCard>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       {/* ==================== CONTACT ==================== */}
-      <section id="contact" className="border-b border-zinc-200">
+      <section id="contact" className="border-b border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
+          <Reveal>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
             Contact
           </p>
 
-          <h2 className="mt-4 max-w-3xl text-4xl font-bold tracking-tight text-zinc-950 md:text-5xl">
+          <h2 className="mt-4 max-w-3xl text-4xl font-bold tracking-tight text-zinc-950 md:text-5xl dark:text-white">
             Let&apos;s connect.
           </h2>
 
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-600">
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-600 dark:text-zinc-400">
             Interested in software engineering, cloud, AI/GenAI, developer
             tooling, or simply want to connect? Feel free to reach out.
           </p>
+          </Reveal>
 
-          <div className="mt-16 grid gap-6 md:grid-cols-2">
+          <Stagger className="mt-16 grid gap-6 md:grid-cols-2">
             {/* Email */}
+            <StaggerItem>
+            <SpotlightCard>
             <a
               href="mailto:narendraavula2@gmail.com"
-              className="group rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
+              className="block rounded-2xl p-8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:focus-visible:outline-white"
             >
               <div className="flex items-center gap-3">
                 <span
@@ -497,29 +522,33 @@ export default function Home() {
                   />
                 </span>
 
-                <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">
+                <p className="text-sm font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
                   Email
                 </p>
               </div>
 
-              <h3 className="mt-5 text-xl font-semibold text-zinc-950">
+              <h3 className="mt-5 text-xl font-semibold text-zinc-950 dark:text-white">
                 narendraavula2@gmail.com
               </h3>
 
-              <p className="mt-3 text-zinc-600">
+              <p className="mt-3 text-zinc-600 dark:text-zinc-400">
                 Send me an email{" "}
                 <span className="inline-block transition-transform group-hover:translate-x-1">
                   →
                 </span>
               </p>
             </a>
+            </SpotlightCard>
+            </StaggerItem>
 
             {/* LinkedIn */}
+            <StaggerItem>
+            <SpotlightCard>
             <a
               href="https://www.linkedin.com/in/narendraavula/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
+              className="block rounded-2xl p-8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:focus-visible:outline-white"
             >
               <div className="flex items-center gap-3">
                 <span
@@ -533,64 +562,70 @@ export default function Home() {
                   />
                 </span>
 
-                <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">
+                <p className="text-sm font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
                   LinkedIn
                 </p>
               </div>
 
-              <h3 className="mt-5 text-xl font-semibold text-zinc-950">
+              <h3 className="mt-5 text-xl font-semibold text-zinc-950 dark:text-white">
                 Connect on LinkedIn
               </h3>
 
-              <p className="mt-3 text-zinc-600">
+              <p className="mt-3 text-zinc-600 dark:text-zinc-400">
                 Professional profile{" "}
                 <span className="inline-block transition-transform group-hover:translate-x-1">
                   →
                 </span>
               </p>
             </a>
+            </SpotlightCard>
+            </StaggerItem>
 
             {/* GitHub */}
+            <StaggerItem>
+            <SpotlightCard>
             <a
               href="https://github.com/narendra-avula/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
+              className="block rounded-2xl p-8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:focus-visible:outline-white"
             >
               <div className="flex items-center gap-3">
                 <span
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
-                  style={{ backgroundColor: "#1817171A" }}
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-zinc-900/10 dark:bg-white/10"
                 >
                   <FaGithub
-                    className="h-4 w-4"
-                    style={{ color: "#181717" }}
+                    className="h-4 w-4 text-zinc-900 dark:text-white"
                     aria-hidden="true"
                   />
                 </span>
 
-                <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">
+                <p className="text-sm font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
                   GitHub
                 </p>
               </div>
 
-              <h3 className="mt-5 text-xl font-semibold text-zinc-950">
+              <h3 className="mt-5 text-xl font-semibold text-zinc-950 dark:text-white">
                 View my code
               </h3>
 
-              <p className="mt-3 text-zinc-600">
+              <p className="mt-3 text-zinc-600 dark:text-zinc-400">
                 Projects and experiments{" "}
                 <span className="inline-block transition-transform group-hover:translate-x-1">
                   →
                 </span>
               </p>
             </a>
+            </SpotlightCard>
+            </StaggerItem>
 
             {/* Resume */}
+            <StaggerItem>
+            <SpotlightCard>
             <a
               href="/resume.pdf"
               download="Narendra_Avula_Resume.pdf"
-              className="group rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
+              className="block rounded-2xl p-8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:focus-visible:outline-white"
             >
               <div className="flex items-center gap-3">
                 <span
@@ -604,23 +639,25 @@ export default function Home() {
                   />
                 </span>
 
-                <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">
+                <p className="text-sm font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
                   Resume
                 </p>
               </div>
 
-              <h3 className="mt-5 text-xl font-semibold text-zinc-950">
+              <h3 className="mt-5 text-xl font-semibold text-zinc-950 dark:text-white">
                 Download Resume
               </h3>
 
-              <p className="mt-3 text-zinc-600">
+              <p className="mt-3 text-zinc-600 dark:text-zinc-400">
                 View my professional experience{" "}
                 <span className="inline-block transition-transform group-hover:translate-x-1">
                   →
                 </span>
               </p>
             </a>
-          </div>
+            </SpotlightCard>
+            </StaggerItem>
+          </Stagger>
         </div>
       </section>
 

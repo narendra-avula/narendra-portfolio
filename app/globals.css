@@ -1,8 +1,26 @@
 @import "tailwindcss";
 
+/* Class-based dark mode: <html class="dark"> */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #fafaf9;
   --foreground: #171717;
+  --grid-line: #e4e4e7;
+  --blob-1: #bfdbfe;
+  --blob-2: #ddd6fe;
+  --blob-3: #fbcfe8;
+  color-scheme: light;
+}
+
+.dark {
+  --background: #09090b;
+  --foreground: #f4f4f5;
+  --grid-line: #27272a;
+  --blob-1: rgba(37, 99, 235, 0.35);
+  --blob-2: rgba(124, 58, 237, 0.32);
+  --blob-3: rgba(219, 39, 119, 0.18);
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -34,42 +52,44 @@ body {
   font-family: var(--font-geist-sans, Arial, Helvetica, sans-serif);
 }
 
-/* ---- Entrance animations ---- */
-
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
+/* Slow shimmer across gradient text */
+@keyframes gradient-pan {
   to {
-    opacity: 1;
-    transform: translateY(0);
+    background-position: 200% center;
   }
 }
 
-.animate-fade-up {
-  animation: fade-up 0.55s ease-out both;
+.animate-gradient {
+  animation: gradient-pan 6s linear infinite;
 }
 
-.animate-fade-up-1 {
-  animation: fade-up 0.55s 0.08s ease-out both;
+/* Clickable things always show a pointer */
+a,
+button,
+[role="button"] {
+  cursor: pointer;
 }
 
-.animate-fade-up-2 {
-  animation: fade-up 0.55s 0.16s ease-out both;
+::selection {
+  background: #c7d2fe;
+  color: #1e1b4b;
 }
 
-.animate-fade-up-3 {
-  animation: fade-up 0.55s 0.24s ease-out both;
+.dark ::selection {
+  background: #4338ca;
+  color: #eef2ff;
+}
+
+/* Smooth colour cross-fade when the theme is toggled */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, fill 0.3s ease !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-fade-up,
-  .animate-fade-up-1,
-  .animate-fade-up-2,
-  .animate-fade-up-3 {
+  .animate-gradient {
     animation: none;
-    opacity: 1;
-    transform: none;
   }
 }
