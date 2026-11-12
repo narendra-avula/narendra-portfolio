@@ -3,7 +3,7 @@
  * URL is the default. Set NEXT_PUBLIC_SITE_URL in Vercel once the domain works.
  */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://narendra-portfolio-woad.vercel.app"
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://narendraavula.com"
 ).replace(/\/$/, "");
 
 export type NavItem = {

@@ -56,7 +56,7 @@ test.describe("case studies", () => {
       }
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         "href",
-        `https://narendra-portfolio-woad.vercel.app/projects/${slug}`
+        `https://narendraavula.com/projects/${slug}`
       );
       await expect(page).toHaveTitle(new RegExp(`^${title}`));
       expect(errors).toEqual([]);
