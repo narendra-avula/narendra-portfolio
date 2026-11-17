@@ -111,17 +111,17 @@ test.describe("SEO", () => {
     const canonical = await page.locator('link[rel="canonical"]').getAttribute("href");
     const ogImage = await page.locator('meta[property="og:image"]').first().getAttribute("content");
     for (const url of [canonical, ogImage]) {
-      expect(url).toContain("narendra-portfolio-woad.vercel.app");
+      expect(url).toContain("narendraavula.com");
       expect(url).not.toContain("narendraavula.com");
     }
   });
 
   test("robots and sitemap point at the canonical site URL", async ({ request }) => {
     const robots = await (await request.get("/robots.txt")).text();
-    expect(robots).toContain("Sitemap: https://narendra-portfolio-woad.vercel.app/sitemap.xml");
+    expect(robots).toContain("Sitemap: https://narendraavula.com/sitemap.xml");
     const sitemap = await (await request.get("/sitemap.xml")).text();
-    expect(sitemap).toContain("<loc>https://narendra-portfolio-woad.vercel.app/</loc>");
-    expect(sitemap).toContain("<loc>https://narendra-portfolio-woad.vercel.app/projects/prepforge</loc>");
+    expect(sitemap).toContain("<loc>https://narendraavula.com/</loc>");
+    expect(sitemap).toContain("<loc>https://narendraavula.com/projects/prepforge</loc>");
     expect(sitemap).not.toContain("/projects/checkmate");
   });
 });

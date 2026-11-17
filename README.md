@@ -2,7 +2,7 @@
 
 Personal portfolio of **Narendra Avula**, a software engineer with 11+ years of experience in backend systems, cloud and reliability engineering, and AI/GenAI developer tooling.
 
-**Live:** https://narendra-portfolio-woad.vercel.app
+**Live:** https://narendraavula.com
 
 [![CI](https://github.com/narendra-avula/narendra-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/narendra-avula/narendra-portfolio/actions/workflows/ci.yml)
 
