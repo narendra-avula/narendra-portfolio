@@ -112,7 +112,7 @@ test.describe("SEO", () => {
     const ogImage = await page.locator('meta[property="og:image"]').first().getAttribute("content");
     for (const url of [canonical, ogImage]) {
       expect(url).toContain("narendraavula.com");
-      expect(url).not.toContain("narendraavula.com");
+      expect(url).not.toContain("narendra-portfolio-woad.vercel.app");
     }
   });
 
