@@ -3,6 +3,13 @@ import { caseStudies } from "@/content/case-studies";
 export type ProjectArea = "Backend" | "Cloud" | "AI / GenAI";
 
 export type ProjectVisual = "career" | "review" | "resilience" | "learning";
+export type ProjectStatus = "live" | "in-development" | "planned";
+
+export type ProjectEvidence = {
+  label: string;
+  href: string;
+  kind: "github" | "demo";
+};
 
 export type Project = {
   slug: string;
@@ -16,6 +23,9 @@ export type Project = {
   focusAreas: string[];
   featured: boolean;
   visual?: ProjectVisual;
+  status?: ProjectStatus;
+  /** Public evidence only; private repositories and unavailable demos stay omitted. */
+  evidence?: ProjectEvidence[];
   /** Technical areas used by the catalogue filter (kind covers Professional / Personal) */
   areas: ProjectArea[];
   /** Employer the project was built at (must match an experience company) */
@@ -38,6 +48,7 @@ export const projects: Project[] = [
     focusAreas: ["Resume & JD analysis", "Skill gaps", "Interview prep", "Job discovery", "LLM integrations"],
     featured: true,
     visual: "career",
+    status: "in-development",
     areas: ["AI / GenAI", "Backend"],
   },
   {
@@ -80,6 +91,7 @@ export const projects: Project[] = [
     focusAreas: ["Content organization", "Learning workflows", "AI-assisted learning", "Assessments"],
     featured: true,
     visual: "learning",
+    status: "in-development",
     areas: ["AI / GenAI", "Backend"],
   },
   {

@@ -9,6 +9,7 @@ import { Container, Eyebrow, ExternalLink, TagList, focusRing } from "@/componen
 import { Reveal } from "@/components/motion";
 import ArchitectureDiagram from "@/components/projects/ArchitectureDiagram";
 import StatusBadge from "@/components/projects/StatusBadge";
+import ProjectStatusBadge from "@/components/projects/ProjectStatusBadge";
 import TrackView from "@/components/analytics/TrackView";
 import { analyticsEvents } from "@/lib/analytics";
 
@@ -162,6 +163,11 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
           <h1 id="case-study-title" className="mt-3 text-4xl font-semibold text-fg md:text-5xl">
             {project.title}
           </h1>
+          {project.status && (
+            <div className="mt-4">
+              <ProjectStatusBadge status={project.status} />
+            </div>
+          )}
           <p className="mt-4 text-lg leading-8 text-muted">{project.summary}</p>
           <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-sm">
             {[

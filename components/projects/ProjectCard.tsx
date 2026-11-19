@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { LuArrowRight, LuClock } from "react-icons/lu";
+import { LuArrowRight, LuClock, LuExternalLink, LuGithub } from "react-icons/lu";
 import { hasCaseStudy, type Project } from "@/content/projects";
-import { Card, TagList, focusRing } from "@/components/ui";
+import { Card, ExternalLink, TagList, focusRing } from "@/components/ui";
 import ProjectVisualPanel from "@/components/projects/ProjectVisual";
+import ProjectStatusBadge from "@/components/projects/ProjectStatusBadge";
 
 /**
  * Project summary card. With a case study the whole card is clickable
@@ -27,6 +28,7 @@ export default function ProjectCard({
         {showVisual && project.visual && <ProjectVisualPanel variant={project.visual} />}
         <div className={`${showVisual && project.visual ? "mt-5" : ""} flex flex-wrap items-center gap-2 text-xs`}>
           <span className="font-medium text-accent">{project.category}</span>
+          {project.status && <ProjectStatusBadge status={project.status} />}
           {meta.map((m) => (
             <span key={m} className="contents">
               <span className="text-subtle" aria-hidden="true">
@@ -56,6 +58,22 @@ export default function ProjectCard({
             <TagList items={project.focusAreas} label="Focus areas" />
           )}
         </div>
+        {project.evidence && project.evidence.length > 0 && (
+          <ul className="mt-4 flex flex-wrap gap-3 text-sm">
+            {project.evidence.map((link) => (
+              <li key={link.href}>
+                <ExternalLink href={link.href} className={`inline-flex items-center gap-1.5 rounded font-medium text-accent hover:underline ${focusRing}`}>
+                  {link.kind === "github" ? (
+                    <LuGithub className="h-4 w-4" aria-hidden="true" />
+                  ) : (
+                    <LuExternalLink className="h-4 w-4" aria-hidden="true" />
+                  )}
+                  {link.label}
+                </ExternalLink>
+              </li>
+            ))}
+          </ul>
+        )}
         <div className="mt-5 border-t border-line pt-4 text-sm">
           {href ? (
             <span className="inline-flex items-center gap-1.5 font-medium text-accent" aria-hidden="true">

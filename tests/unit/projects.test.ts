@@ -41,6 +41,15 @@ describe("project filter", () => {
     expect(filterProjects(projects, "Personal", "django")).toEqual([]);
     expect(slugsOf(filterProjects(projects, "Professional", "medplus"))).toEqual(["operations-management-platform"]);
   });
+
+  it("uses only valid public evidence links", () => {
+    for (const project of projects) {
+      for (const link of project.evidence ?? []) {
+        expect(link.href, project.slug).toMatch(/^https:\/\//);
+        expect(["github", "demo"], link.kind).toContain(link.kind);
+      }
+    }
+  });
 });
 
 describe("case studies", () => {
