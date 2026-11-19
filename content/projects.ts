@@ -24,6 +24,8 @@ export type Project = {
   featured: boolean;
   visual?: ProjectVisual;
   status?: ProjectStatus;
+  /** Date the public project description was last reviewed. */
+  updated: string;
   /** Public evidence only; private repositories and unavailable demos stay omitted. */
   evidence?: ProjectEvidence[];
   /** Technical areas used by the catalogue filter (kind covers Professional / Personal) */
@@ -49,6 +51,7 @@ export const projects: Project[] = [
     featured: true,
     visual: "career",
     status: "in-development",
+    updated: "2026-11-19",
     areas: ["AI / GenAI", "Backend"],
   },
   {
@@ -62,6 +65,7 @@ export const projects: Project[] = [
     focusAreas: ["Automated review", "Static analysis", "Security scanning", "RAG"],
     featured: true,
     visual: "review",
+    updated: "2026-11-19",
     areas: ["AI / GenAI"],
   },
   {
@@ -75,6 +79,7 @@ export const projects: Project[] = [
     focusAreas: ["Chaos engineering", "Microservices", "Cloud environments", "Observability"],
     featured: true,
     visual: "resilience",
+    updated: "2026-11-19",
     areas: ["Cloud", "Backend"],
     company: "JPMorgan Chase",
     client: "Internal",
@@ -92,6 +97,7 @@ export const projects: Project[] = [
     featured: true,
     visual: "learning",
     status: "in-development",
+    updated: "2026-11-19",
     areas: ["AI / GenAI", "Backend"],
   },
   {
@@ -104,6 +110,7 @@ export const projects: Project[] = [
     technologies: ["Python", "Django", "Django REST Framework", "Microservices", "RabbitMQ", "Linux", "Shell Scripting"],
     focusAreas: [],
     featured: false,
+    updated: "2026-11-19",
     areas: ["Backend"],
     company: "Qvantel Software Solutions",
     client: "Ericsson",
@@ -125,6 +132,7 @@ export const projects: Project[] = [
     technologies: ["Python", "Django", "Angular", "TypeScript", "Ionic", "MySQL", "MongoDB", "AWS"],
     focusAreas: [],
     featured: false,
+    updated: "2026-11-19",
     areas: ["Backend"],
     company: "CustomFurnish / Hinshitsu Manufacturing",
     client: "Medplus",
@@ -146,6 +154,7 @@ export const projects: Project[] = [
     technologies: ["Python", "Django", "Angular", "TypeScript", "MongoDB", "AWS"],
     focusAreas: [],
     featured: false,
+    updated: "2026-11-19",
     areas: ["Backend"],
     company: "CustomFurnish / Hinshitsu Manufacturing",
     period: "2019",
@@ -164,6 +173,7 @@ export const projects: Project[] = [
     technologies: ["Python", "Django", "jQuery", "MongoDB", "Linux", "AWS"],
     focusAreas: [],
     featured: false,
+    updated: "2026-11-19",
     areas: ["Backend"],
     company: "CustomFurnish / Hinshitsu Manufacturing",
     period: "2017 – 2019",
@@ -184,6 +194,7 @@ export const projects: Project[] = [
     technologies: ["Python", "Django", "jQuery", "MongoDB", "Linux", "AWS"],
     focusAreas: [],
     featured: false,
+    updated: "2026-11-19",
     areas: ["Backend"],
     company: "CustomFurnish / Hinshitsu Manufacturing",
     period: "2016 – 2020",
@@ -202,6 +213,7 @@ export const projects: Project[] = [
     technologies: ["Python", "Django", "jQuery", "MySQL", "MongoDB", "AWS"],
     focusAreas: [],
     featured: false,
+    updated: "2026-11-19",
     areas: ["Backend"],
     company: "CustomFurnish / Hinshitsu Manufacturing",
     period: "2015 – 2016",

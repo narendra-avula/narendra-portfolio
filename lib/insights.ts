@@ -94,5 +94,6 @@ export function toSummary(i: Insight): InsightSummary {
     readingMinutes: i.readingMinutes,
     isDraft: i.isDraft,
     published: i.published,
+    updated: i.updated,
   };
 }

@@ -4,6 +4,7 @@ import { hasCaseStudy, type Project } from "@/content/projects";
 import { Card, ExternalLink, TagList, focusRing } from "@/components/ui";
 import ProjectVisualPanel from "@/components/projects/ProjectVisual";
 import ProjectStatusBadge from "@/components/projects/ProjectStatusBadge";
+import { formatDate } from "@/lib/insight-date";
 
 /**
  * Project summary card. With a case study the whole card is clickable
@@ -51,6 +52,9 @@ export default function ProjectCard({
           )}
         </Heading>
         <p className="mt-3 flex-1 leading-7 text-muted">{project.summary}</p>
+        <p className="mt-3 text-sm text-subtle">
+          Last updated <time dateTime={project.updated}>{formatDate(project.updated)}</time>
+        </p>
         <div className="mt-5">
           {project.technologies.length > 0 ? (
             <TagList items={project.technologies} />

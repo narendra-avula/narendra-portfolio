@@ -13,6 +13,7 @@ export type InsightSummary = {
   readingMinutes: number;
   isDraft: boolean;
   published?: string;
+  updated?: string;
 };
 
 /** Category chip plus case-insensitive search over title, summary, category and tags */

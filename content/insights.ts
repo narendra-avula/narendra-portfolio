@@ -39,6 +39,7 @@ export const insights: InsightMeta[] = [
     category: "Backend Engineering",
     tags: ["RabbitMQ", "Microservices", "Django", "Reliability"],
     status: "draft",
+    updated: "2026-11-19",
   },
   {
     slug: "chaos-experiments-teams-trust",
@@ -48,5 +49,6 @@ export const insights: InsightMeta[] = [
     category: "Cloud Engineering",
     tags: ["Chaos Engineering", "Resilience", "Observability", "SRE"],
     status: "draft",
+    updated: "2026-11-19",
   },
 ];

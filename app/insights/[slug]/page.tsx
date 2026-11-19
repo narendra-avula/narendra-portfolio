@@ -37,8 +37,9 @@ export async function generateMetadata(props: PageProps<"/insights/[slug]">): Pr
       tags: insight.tags,
       ...(insight.published && { publishedTime: insight.published }),
       ...(insight.updated && { modifiedTime: insight.updated }),
+      images: [{ url: `/insights/${slug}/opengraph-image` }],
     },
-    twitter: { title: insight.title, description: insight.summary },
+    twitter: { title: insight.title, description: insight.summary, images: [`/insights/${slug}/opengraph-image`] },
   };
 }
 

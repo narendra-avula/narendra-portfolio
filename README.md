@@ -40,6 +40,7 @@ npm run dev        # http://localhost:3000
 - [Architecture](docs/ARCHITECTURE.md): how the site is built and where things live
 - [Content guide](docs/CONTENT_GUIDE.md): editing profile, projects, case studies and articles
 - [Deployment](docs/DEPLOYMENT.md): Vercel, environment variables, custom domain, release checklist
+- [Analytics](docs/ANALYTICS.md): tracked events and the Vercel dashboard
 - [Design system](docs/DESIGN_SYSTEM.md): tokens, typography and components
 - [Implementation plan](docs/IMPLEMENTATION_PLAN.md) and [audit](docs/PORTFOLIO_AUDIT.md): Portfolio 2.0 history
 

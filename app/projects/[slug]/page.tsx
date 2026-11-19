@@ -12,6 +12,7 @@ import StatusBadge from "@/components/projects/StatusBadge";
 import ProjectStatusBadge from "@/components/projects/ProjectStatusBadge";
 import TrackView from "@/components/analytics/TrackView";
 import { analyticsEvents } from "@/lib/analytics";
+import { formatDate } from "@/lib/insight-date";
 
 const slugs = Object.keys(caseStudies);
 
@@ -36,8 +37,8 @@ export async function generateMetadata(props: PageProps<"/projects/[slug]">): Pr
     title,
     description,
     alternates: { canonical: `/projects/${slug}` },
-    openGraph: { type: "article", url: `/projects/${slug}`, title, description },
-    twitter: { title, description },
+    openGraph: { type: "article", url: `/projects/${slug}`, title, description, images: [{ url: `/projects/${slug}/opengraph-image` }] },
+    twitter: { title, description, images: [`/projects/${slug}/opengraph-image`] },
   };
 }
 
@@ -175,6 +176,7 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
               ["Company", project.company],
               ["Period", project.period],
               ["Availability", study.availability],
+              ["Last updated", formatDate(project.updated)],
             ]
               .filter((row): row is [string, string] => Boolean(row[1]))
               .map(([k, v]) => (

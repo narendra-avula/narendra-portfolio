@@ -9,13 +9,23 @@ export function DraftBadge() {
   );
 }
 
-/** "12 March 2026 · 4 min read", or just the reading time for drafts */
-export function InsightMetaLine({ insight }: { insight: Pick<InsightSummary, "published" | "readingMinutes" | "isDraft"> }) {
+/** Shows publication freshness and reading time without exposing draft publication dates. */
+export function InsightMetaLine({
+  insight,
+}: {
+  insight: Pick<InsightSummary, "published" | "updated" | "readingMinutes" | "isDraft">;
+}) {
   return (
     <p className="text-subtle">
       {insight.published && !insight.isDraft && (
         <>
           <time dateTime={insight.published}>{formatDate(insight.published)}</time>
+          <span aria-hidden="true"> · </span>
+        </>
+      )}
+      {insight.updated && (
+        <>
+          <span>Updated {formatDate(insight.updated)}</span>
           <span aria-hidden="true"> · </span>
         </>
       )}
