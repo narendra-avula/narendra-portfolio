@@ -185,7 +185,7 @@ Phases 1–7 steps 1–3 are done on `feat/portfolio-2`. PR #1 (https://github.c
 
 These are the next recommended improvements after the current release checklist:
 
-- [ ] Self-host Geist and Geist Mono with `next/font/local` so builds do not depend on Google Fonts availability.
+- [x] Self-host Geist and Geist Mono with `next/font/local` so builds do not depend on Google Fonts availability.
 - [ ] Verify `narendraavula.com` resolves correctly, redirects from the Vercel URL, and serves valid social previews.
 - [ ] Add public GitHub/demo links and clear status labels (`Live`, `In development`, `Planned`) to project cards where applicable.
 - [ ] Add recruiter-focused details such as availability, preferred roles, location/time zone, and a concise “Why work with me?” section.

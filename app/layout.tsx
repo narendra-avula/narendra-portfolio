@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { profile } from "@/content/profile";
 import { SITE_URL } from "@/lib/site";
@@ -11,8 +11,18 @@ import JsonLd from "@/components/JsonLd";
 import SiteAnalytics from "@/components/analytics/SiteAnalytics";
 import { personJsonLd, websiteJsonLd } from "@/lib/structured-data";
 
-const geistSans = Geist({ subsets: ["latin"], variable: "--font-geist-sans", display: "swap" });
-const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
+const geistSans = localFont({
+  src: "../public/fonts/Geist-Variable.woff2",
+  variable: "--font-geist-sans",
+  display: "swap",
+  weight: "100 900",
+});
+const geistMono = localFont({
+  src: "../public/fonts/GeistMono-Variable.woff2",
+  variable: "--font-geist-mono",
+  display: "swap",
+  weight: "100 900",
+});
 
 const title = `${profile.name} | ${profile.positioning}`;
 const description = `${profile.name} is a software engineer with ${profile.yearsExperience}+ years of experience in Python and Django backends, cloud and resiliency engineering at ${profile.employer}, and AI/GenAI developer tooling.`;
