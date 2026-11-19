@@ -87,6 +87,14 @@ test.describe("SEO", () => {
     const robots = await (await request.get("/robots.txt")).text();
     expect(robots).toMatch(/Sitemap: .*\/sitemap\.xml/);
   });
+
+  test("dynamic insight and project social images return PNGs", async ({ request }) => {
+    for (const path of ["/insights/idempotent-message-consumers/opengraph-image", "/projects/prepforge/opengraph-image"]) {
+      const response = await request.get(path);
+      expect(response.status(), path).toBe(200);
+      expect(response.headers()["content-type"], path).toContain("image/png");
+    }
+  });
 });
 
 test.describe("contact", () => {

@@ -63,6 +63,10 @@ test.describe("recruiter mode", () => {
     await expect(contact.getByRole("link", { name: "linkedin.com/in/narendraavula" })).toBeVisible();
     for (const h of ["Summary", "Experience", "Selected highlights", "Skills", "Projects", "Education and certification"])
       await expect(page.getByRole("heading", { level: 2, name: h })).toBeVisible();
+    await expect(page.getByText("Open to discussing suitable opportunities")).toBeVisible();
+    await expect(page.getByText("IST (UTC+5:30)").first()).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Why work with me" })).toBeVisible();
+    await expect(page.getByText("I combine backend and cloud reliability experience with hands-on AI product development.")).toBeVisible();
     for (const company of ["JPMorgan Chase", "Qvantel Software Solutions", "CustomFurnish / Hinshitsu Manufacturing"])
       await expect(page.getByRole("heading", { level: 3, name: new RegExp(company) })).toBeVisible();
     await expect(page.getByRole("button", { name: "Print / save as PDF" })).toBeVisible();

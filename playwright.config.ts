@@ -24,6 +24,6 @@ export default defineConfig({
     // Builds the draft insights so their pages can be tested; production
     // hides drafts (covered by unit tests). No RESEND_API_KEY: the form stays
     // hidden, as on the live site until a key is configured.
-    env: { SHOW_DRAFTS: "true" },
+    env: { SHOW_DRAFTS: "true", VERCEL: "1" },
   },
 });
