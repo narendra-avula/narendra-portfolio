@@ -12,6 +12,8 @@ export default function RecruiterSnapshot() {
     { term: "Current role", value: `${profile.designation}, ${profile.employer}` },
     { term: "Core expertise", value: profile.coreExpertise.join(" · ") },
     { term: "Focus", value: profile.focus.join(" · ") },
+    { term: "Availability", value: profile.openTo.availability },
+    { term: "Location / time zone", value: `${profile.location} · ${profile.openTo.timeZone}` },
     {
       term: "Education",
       value: (
@@ -99,6 +101,7 @@ export default function RecruiterSnapshot() {
                 {profile.location}
               </p>
               <p>{profile.openTo.workMode}</p>
+              <p>{profile.openTo.timeZone}</p>
             </div>
             <ButtonLink href="#contact" variant="secondary" className="mt-6 w-full">
               Get in touch
@@ -106,6 +109,19 @@ export default function RecruiterSnapshot() {
           </Card>
         </Reveal>
       </div>
+      <Reveal className="mt-6">
+        <Card className="p-6 md:p-8">
+          <Eyebrow>Why work with me</Eyebrow>
+          <h2 className="mt-3 text-2xl font-semibold text-fg">Practical engineering from idea to production</h2>
+          <ul className="mt-5 grid gap-3 md:grid-cols-3">
+            {profile.whyWorkWithMe.map((reason) => (
+              <li key={reason} className="rounded-lg border border-line bg-surface-2 p-4 text-[15px] leading-7 text-muted">
+                {reason}
+              </li>
+            ))}
+          </ul>
+        </Card>
+      </Reveal>
     </Section>
   );
 }

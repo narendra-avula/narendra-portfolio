@@ -21,6 +21,13 @@ describe("content integrity", () => {
     expect(current[0].company).toBe(profile.employer);
   });
 
+  it("has recruiter conversion details in the shared profile", () => {
+    expect(profile.openTo.availability).not.toBe("");
+    expect(profile.openTo.roles.length).toBeGreaterThan(0);
+    expect(profile.openTo.timeZone).toMatch(/UTC/);
+    expect(profile.whyWorkWithMe.length).toBeGreaterThanOrEqual(3);
+  });
+
   it("features exactly the four brief projects, each with a visual", () => {
     expect(featuredProjects.map((p) => p.title)).toEqual([
       "PrepForge",

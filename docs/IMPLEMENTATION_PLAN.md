@@ -188,7 +188,7 @@ These are the next recommended improvements after the current release checklist:
 - [x] Self-host Geist and Geist Mono with `next/font/local` so builds do not depend on Google Fonts availability.
 - [ ] Verify `narendraavula.com` resolves correctly, redirects from the Vercel URL, and serves valid social previews.
 - [x] Add public GitHub/demo links and clear status labels (`Live`, `In development`, `Planned`) to project cards where applicable.
-- [ ] Add recruiter-focused details such as availability, preferred roles, location/time zone, and a concise “Why work with me?” section.
+- [x] Add recruiter-focused details such as availability, preferred roles, location/time zone, and a concise “Why work with me?” section.
 - [x] Add “Last updated” dates to projects and published insights.
 - [x] Generate project- and insight-specific Open Graph images for richer social sharing.
 - [x] Add analytics events or reporting for resume downloads, project views, and contact submissions.

@@ -25,6 +25,7 @@ export const profile = {
   focus: ["Cloud & reliability engineering", "AI / GenAI and developer tooling"],
 
   openTo: {
+    availability: "Open to discussing suitable opportunities",
     roles: [
       "Senior Software Engineer",
       "AI / ML Engineer",
@@ -32,7 +33,14 @@ export const profile = {
       "Backend / API Engineer",
     ],
     workMode: "Remote, hybrid or on-site",
+    timeZone: "IST (UTC+5:30)",
   },
+
+  whyWorkWithMe: [
+    "I combine backend and cloud reliability experience with hands-on AI product development.",
+    "I make architecture trade-offs explicit and build systems that are testable, observable and resilient.",
+    "I can contribute across product design, APIs, data, automation and delivery rather than only one layer.",
+  ],
 } as const;
 
 export const yearsLabel = `${profile.yearsExperience}+`;

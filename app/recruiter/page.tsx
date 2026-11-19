@@ -69,6 +69,9 @@ export default function RecruiterPage() {
           <p className="mt-1 text-fg">
             {profile.designation}, {profile.employer} · {yearsLabel} years · {profile.location}
           </p>
+          <p className="mt-1 text-sm text-muted">
+            {profile.openTo.availability} · {profile.openTo.timeZone}
+          </p>
           <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1.5 text-sm print:mt-2" aria-label="Contact">
             {contacts.map((c) => (
               <li key={c.label}>
@@ -89,8 +92,18 @@ export default function RecruiterPage() {
           <p className="leading-7 text-fg">{profile.hero.summary}</p>
           <p className="mt-3 text-[15px] leading-7 text-muted">
             <span className="text-subtle">Open to: </span>
-            {profile.openTo.roles.join(" · ")}. {profile.openTo.workMode}.
+            {profile.openTo.roles.join(" · ")}. {profile.openTo.workMode}. {profile.openTo.timeZone}.
           </p>
+        </Block>
+
+        <Block title="Why work with me">
+          <ul className="grid gap-3 sm:grid-cols-3">
+            {profile.whyWorkWithMe.map((reason) => (
+              <li key={reason} className="rounded-lg border border-line bg-surface p-4 text-[15px] leading-6 text-fg print:p-2">
+                {reason}
+              </li>
+            ))}
+          </ul>
         </Block>
 
         <Block title="Experience">
